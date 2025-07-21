@@ -3,11 +3,13 @@ package com.example.expense_transactions.dto;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class ExpenseTrasactionsRecordsDTO {
+	@JsonIgnore
 	private int id;
 
-	@JsonIgnore
+	@JsonInclude
 	private long row_no;
 
 	private Date date;
@@ -22,14 +24,27 @@ public class ExpenseTrasactionsRecordsDTO {
 
 	private String payment_mode_type;
 
-	private String paid_by;
+	private String by_whom;
 
 	public ExpenseTrasactionsRecordsDTO() {
 		super();
 	}
 
+	public ExpenseTrasactionsRecordsDTO(long row_no, Date date, String expense, String type, double amount,
+			String payment_mode, String payment_mode_type, String by_whom) {
+		super();
+		this.row_no = row_no;
+		this.date = date;
+		this.expense = expense;
+		this.type = type;
+		this.amount = amount;
+		this.payment_mode = payment_mode;
+		this.payment_mode_type = payment_mode_type;
+		this.by_whom = by_whom;
+	}
+
 	public ExpenseTrasactionsRecordsDTO(int id, long row_no, Date date, String expense, String type, double amount,
-			String payment_mode, String payment_mode_type, String paid_by) {
+			String payment_mode, String payment_mode_type, String by_whom) {
 		super();
 		this.id = id;
 		this.row_no = row_no;
@@ -39,7 +54,7 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.amount = amount;
 		this.payment_mode = payment_mode;
 		this.payment_mode_type = payment_mode_type;
-		this.paid_by = paid_by;
+		this.by_whom = by_whom;
 	}
 
 	public int getId() {
@@ -106,19 +121,19 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.payment_mode_type = payment_mode_type;
 	}
 
-	public String getPaid_by() {
-		return paid_by;
+	public String getBy_whom() {
+		return by_whom;
 	}
 
-	public void setPaid_by(String paid_by) {
-		this.paid_by = paid_by;
+	public void setBy_whom(String by_whom) {
+		this.by_whom = by_whom;
 	}
 
 	@Override
 	public String toString() {
-		return "ExpenseTrasactionsRecordsDTO [id=" + id + ", date=" + date + ", expense=" + expense + ", type=" + type
-				+ ", amount=" + amount + ", payment_mode=" + payment_mode + ", payment_mode_type=" + payment_mode_type
-				+ ", paid_by=" + paid_by + "]";
+		return "ExpenseTrasactionsRecordsDTO [id=" + id + ", row_no=" + row_no + ", date=" + date + ", expense="
+				+ expense + ", type=" + type + ", amount=" + amount + ", payment_mode=" + payment_mode
+				+ ", payment_mode_type=" + payment_mode_type + ", by_whom=" + by_whom + "]";
 	}
 
 }

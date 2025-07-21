@@ -42,19 +42,6 @@ public class ExpenseTrasactionsRecordsEntity {
 		super();
 	}
 
-	public ExpenseTrasactionsRecordsEntity(int id, Date date, String expenses_category_name, String sub_category_name,
-			double amount, String payment_mode_name, String type_name, String by_whom) {
-		super();
-		this.id = id;
-		this.date = date;
-		this.expenses_category_name = expenses_category_name;
-		this.sub_category_name = sub_category_name;
-		this.amount = amount;
-		this.payment_mode_name = payment_mode_name;
-		this.type_name = type_name;
-		this.by_whom = by_whom;
-	}
-
 	public ExpenseTrasactionsRecordsEntity(Date date, String expenses_category_name, String sub_category_name,
 			double amount, String payment_mode_name, String type_name, String by_whom) {
 		super();

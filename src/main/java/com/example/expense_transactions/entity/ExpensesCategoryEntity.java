@@ -33,5 +33,4 @@ public class ExpensesCategoryEntity {
 	public void setExpenses_category_name(String expenses_category_name) {
 		this.expenses_category_name = expenses_category_name;
 	}
-	
 }

@@ -19,7 +19,7 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 	ExpenseTrasactionsRecordsRepository expenseTrasactionsRecordsRepository;
 
 	List<ExpenseTrasactionsRecordsDTO> expenseTrasactionsRecordsLst = new ArrayList<ExpenseTrasactionsRecordsDTO>();
-	
+
 	List<TotalExpenseTrasactionsRecordsDTO> totalExpenseTrasactionsRecordsLst = new ArrayList<TotalExpenseTrasactionsRecordsDTO>();
 
 	@Override
@@ -37,18 +37,15 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 	public ResponseEntity<String> addExpenseTrasactionsRecords(
 			ExpenseTrasactionsRecordsDTO expenseTrasactionsRecordsDTO) {
 
-		expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(expenseTrasactionsRecordsDTO.getDate(),
+		int n = expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(expenseTrasactionsRecordsDTO.getDate(),
 				expenseTrasactionsRecordsDTO.getExpense(), expenseTrasactionsRecordsDTO.getType(),
 				expenseTrasactionsRecordsDTO.getAmount(), expenseTrasactionsRecordsDTO.getPayment_mode(),
-				expenseTrasactionsRecordsDTO.getPayment_mode_type(), expenseTrasactionsRecordsDTO.getPaid_by());
+				expenseTrasactionsRecordsDTO.getPayment_mode_type(), expenseTrasactionsRecordsDTO.getBy_whom());
 
-		/*
-		 * if (n == 0) { return
-		 * ResponseEntity.ok("Error occured while inserting the data"); } else return
-		 * ResponseEntity.ok("Data inserted successfully");
-		 */
-
-		return ResponseEntity.ok("Data inserted successfully");
+		if (n == 0) {
+			return ResponseEntity.ok("Error occured while inserting the data");
+		} else
+			return ResponseEntity.ok("Data inserted successfully");
 	}
 
 	@Override
@@ -59,7 +56,7 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 				expenseTrasactionsRecordsDTO.getDate(), expenseTrasactionsRecordsDTO.getExpense(),
 				expenseTrasactionsRecordsDTO.getType(), expenseTrasactionsRecordsDTO.getAmount(),
 				expenseTrasactionsRecordsDTO.getPayment_mode(), expenseTrasactionsRecordsDTO.getPayment_mode_type(),
-				expenseTrasactionsRecordsDTO.getPaid_by());
+				expenseTrasactionsRecordsDTO.getBy_whom());
 
 		if (n == 0) {
 			return ResponseEntity.ok("Error occured while updating the data");
@@ -78,8 +75,8 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 	}
 
 	@Override
-	public ResponseEntity<List<TotalExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(String expense_category,
-			String month, int year, String expense_sub_category, String paid_by) {
+	public ResponseEntity<List<TotalExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(
+			String expense_category, String month, int year, String expense_sub_category, String paid_by) {
 
 		DateDTO dateDTO = null;
 
@@ -95,7 +92,7 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 						.getTotalExpenseTrasactionsRecordsByExpenseCategoryAndExpenseSubCategoryAndPaidBy(
 								expense_category, expense_sub_category, dateDTO.getStart_date(), dateDTO.getEnd_date(),
 								paid_by);
-			} else if (expense_category != null  && paid_by != null) {
+			} else if (expense_category != null && paid_by != null) {
 				totalExpenseTrasactionsRecordsLst = expenseTrasactionsRecordsRepository
 						.getTotalExpenseTrasactionsRecordsByExpenseCategoryAndPaidBy(expense_category,
 								dateDTO.getStart_date(), dateDTO.getEnd_date(), paid_by);
@@ -115,5 +112,17 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 		}
 		return ResponseEntity.ok(totalExpenseTrasactionsRecordsLst);
 	}
+	
+	@Override
+	public ResponseEntity<String> addCategoryAndSubCategory(String category, String subCategory) {
+		int n = expenseTrasactionsRecordsRepository.addCategory(category);
 
+		int m = expenseTrasactionsRecordsRepository.addSubCategory(category, subCategory);
+
+		if (m == 0) {
+			return ResponseEntity.ok("Error occured while inserting the data");
+		} else
+			return ResponseEntity.ok("Data inserted successfully");
+
+	}
 }

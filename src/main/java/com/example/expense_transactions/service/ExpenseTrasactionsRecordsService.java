@@ -21,4 +21,6 @@ public interface ExpenseTrasactionsRecordsService {
 	ResponseEntity<List<TotalExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(String expense_category,
 			String month, int year, String expense_sub_category, String paid_by);
 
+	ResponseEntity<String> addCategoryAndSubCategory(String category, String subCategory);
+
 }

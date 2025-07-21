@@ -113,7 +113,7 @@ public class ExpenseTrasactionsRecordsController {
 			row.createCell(4).setCellValue(trasactionsRecordsDTO.getAmount());
 			row.createCell(5).setCellValue(trasactionsRecordsDTO.getPayment_mode());
 			row.createCell(6).setCellValue(trasactionsRecordsDTO.getPayment_mode_type());
-			row.createCell(7).setCellValue(trasactionsRecordsDTO.getPaid_by());
+			row.createCell(7).setCellValue(trasactionsRecordsDTO.getBy_whom());
 		}
 
 		// Write Excel to byte array
@@ -147,6 +147,13 @@ public class ExpenseTrasactionsRecordsController {
 				.getTotalExpenseTrasactionsRecords(expense_category, month, year, expense_sub_category, Paid_by);
 
 		return totalExpenseTrasactionsRecordsDTODTOLst;
+	}
+	
+	@PostMapping(value = "/addCategoryAndSubCategory")
+	public ResponseEntity<String> addCategoryAndSubCategory(@RequestParam(required = true) String category,
+			@RequestParam(required = true) String subCategory) {
+
+		return expenseTrasactionsRecordsService.addCategoryAndSubCategory(category, subCategory);
 
 	}
 
