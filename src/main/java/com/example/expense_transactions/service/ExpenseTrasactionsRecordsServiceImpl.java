@@ -115,6 +115,7 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 	
 	@Override
 	public ResponseEntity<String> addCategoryAndSubCategory(String category, String subCategory) {
+		
 		int n = expenseTrasactionsRecordsRepository.addCategory(category);
 
 		int m = expenseTrasactionsRecordsRepository.addSubCategory(category, subCategory);

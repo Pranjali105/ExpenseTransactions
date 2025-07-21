@@ -3,13 +3,11 @@ package com.example.expense_transactions.dto;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class ExpenseTrasactionsRecordsDTO {
-	@JsonIgnore
 	private int id;
-
-	@JsonInclude
+	
+	@JsonIgnore
 	private long row_no;
 
 	private Date date;
@@ -30,9 +28,10 @@ public class ExpenseTrasactionsRecordsDTO {
 		super();
 	}
 
-	public ExpenseTrasactionsRecordsDTO(long row_no, Date date, String expense, String type, double amount,
+	public ExpenseTrasactionsRecordsDTO(int id, long row_no, Date date, String expense, String type, double amount,
 			String payment_mode, String payment_mode_type, String by_whom) {
 		super();
+		this.id = id;
 		this.row_no = row_no;
 		this.date = date;
 		this.expense = expense;
@@ -43,11 +42,10 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.by_whom = by_whom;
 	}
 
-	public ExpenseTrasactionsRecordsDTO(int id, long row_no, Date date, String expense, String type, double amount,
+	public ExpenseTrasactionsRecordsDTO(int id, Date date, String expense, String type, double amount,
 			String payment_mode, String payment_mode_type, String by_whom) {
 		super();
 		this.id = id;
-		this.row_no = row_no;
 		this.date = date;
 		this.expense = expense;
 		this.type = type;
@@ -135,5 +133,4 @@ public class ExpenseTrasactionsRecordsDTO {
 				+ expense + ", type=" + type + ", amount=" + amount + ", payment_mode=" + payment_mode
 				+ ", payment_mode_type=" + payment_mode_type + ", by_whom=" + by_whom + "]";
 	}
-
 }

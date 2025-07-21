@@ -16,7 +16,7 @@ import jakarta.transaction.Transactional;
 
 public interface ExpenseTrasactionsRecordsRepository extends JpaRepository<ExpenseTrasactionsRecordsEntity, Integer> {
 
-	@Query(value = "SELECT ROW_NUMBER() OVER (ORDER BY etr.date desc) as row_no, etr.date, etr.expenses_category_name, etr.sub_category_name, etr.amount, etr.payment_mode_name, etr.type_name, etr.by_whom\r\n"
+	@Query(value = "SELECT etr.id, etr.date, etr.expenses_category_name, etr.sub_category_name, etr.amount, etr.payment_mode_name, etr.type_name, etr.by_whom\r\n"
 			+ "FROM expense_trasactions_records etr,expenses_category ec,expenses_sub_category esc,payment_mode pm, payment_mode_type pmt,paid_by pb\r\n"
 			+ "where etr.expenses_category_name = ec.expenses_category_name \r\n"
 			+ "and ec.expenses_category_id = esc.expenses_category_id and etr.sub_category_name = esc.sub_category_name \r\n"
@@ -37,7 +37,13 @@ public interface ExpenseTrasactionsRecordsRepository extends JpaRepository<Expen
 	int updateExpenseTrasactionsRecords(int id, Date date, String expense, String type, double amount,
 			String payment_mode, String payment_mode_type, String by_whom);
 
-	@Query(value = "SELECT ROW_NUMBER() OVER (ORDER BY etr.id) as id, etr.date as date, etr.expenses_category_name as expense, etr.sub_category_name as type, etr.amount as amount, etr.payment_mode_name as payment_mode, etr.type_name as payment_mode_type, etr.by_whom as paid_by FROM expense_trasactions_records etr, expenses_category ec, expenses_sub_category esc, payment_mode pm, payment_mode_type pmt, paid_by pb where etr.expenses_category_name = ec.expenses_category_name and ec.expenses_category_id = esc.expenses_category_id and etr.sub_category_name = esc.sub_category_name and etr.payment_mode_name = pm.payment_mode_name and pm.payment_mode_id = pmt.payment_mode_id and etr.type_name = pmt.type_name and etr.by_whom = pb.by_whom", nativeQuery = true)
+	@Query(value = "SELECT etr.id, ROW_NUMBER() OVER (ORDER BY etr.date desc) as row_no, cast(etr.date as date), etr.expenses_category_name, etr.sub_category_name, etr.amount, etr.payment_mode_name, etr.type_name, etr.by_whom\r\n"
+			+ "FROM expense_trasactions_records etr,expenses_category ec,expenses_sub_category esc,payment_mode pm, payment_mode_type pmt,paid_by pb\r\n"
+			+ "where etr.expenses_category_name = ec.expenses_category_name \r\n"
+			+ "and ec.expenses_category_id = esc.expenses_category_id and etr.sub_category_name = esc.sub_category_name \r\n"
+			+ "and etr.payment_mode_name = pm.payment_mode_name \r\n"
+			+ "and pm.payment_mode_id = pmt.payment_mode_id and etr.type_name = pmt.type_name\r\n"
+			+ "and etr.by_whom = pb.by_whom ORDER BY etr.date desc", nativeQuery = true)
 	List<ExpenseTrasactionsRecordsDTO> getExportExpenseTrasactionsRecords();
 
 	@Query(value = "SELECT STR_TO_DATE(CONCAT(?2, '-', ?1, '-01'), '%Y-%m-%d') AS month_start, LAST_DAY(STR_TO_DATE(CONCAT(?2, '-', ?1, '-01'), '%Y-%m-%d')) AS month_end ", nativeQuery = true)
@@ -83,7 +89,7 @@ public interface ExpenseTrasactionsRecordsRepository extends JpaRepository<Expen
 	@Query(value = "INSERT INTO expenses_sub_category(sub_category_id, expenses_category_id, sub_category_name)\r\n"
 			+ "	SELECT (SELECT IFNULL(MAX(sub_category_id), 0) + 1 FROM expenses_sub_category) as sub_category_id, (select ec.expenses_category_id from expenses_category ec where ec.expenses_category_name = ?1), ?2\r\n"
 			+ "	FROM DUAL WHERE NOT EXISTS \r\n"
-			+ "		(SELECT 1 FROM expenses_category ec, expenses_sub_category esc WHERE ec.expenses_category_name = ?2)", nativeQuery = true)
+			+ "		(SELECT 1 FROM expenses_category ec, expenses_sub_category esc WHERE ec.expenses_category_name = ?1 and esc.sub_category_name = ?2)", nativeQuery = true)
 	int addSubCategory(String category, String subCategory);
 
 }
