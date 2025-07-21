@@ -112,18 +112,4 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 		}
 		return ResponseEntity.ok(totalExpenseTrasactionsRecordsLst);
 	}
-	
-	@Override
-	public ResponseEntity<String> addCategoryAndSubCategory(String category, String subCategory) {
-		
-		int n = expenseTrasactionsRecordsRepository.addCategory(category);
-
-		int m = expenseTrasactionsRecordsRepository.addSubCategory(category, subCategory);
-
-		if (m == 0) {
-			return ResponseEntity.ok("Error occured while inserting the data");
-		} else
-			return ResponseEntity.ok("Data inserted successfully");
-
-	}
 }

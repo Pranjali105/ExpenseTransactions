@@ -148,13 +148,5 @@ public class ExpenseTrasactionsRecordsController {
 
 		return totalExpenseTrasactionsRecordsDTODTOLst;
 	}
-	
-	@PostMapping(value = "/addCategoryAndSubCategory")
-	public ResponseEntity<String> addCategoryAndSubCategory(@RequestParam(required = true) String category,
-			@RequestParam(required = true) String subCategory) {
-
-		return expenseTrasactionsRecordsService.addCategoryAndSubCategory(category, subCategory);
-
-	}
 
 }
