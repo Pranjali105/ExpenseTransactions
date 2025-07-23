@@ -73,43 +73,5 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 		}
 		return ResponseEntity.ok(expenseTrasactionsRecordsLst);
 	}
-
-	@Override
-	public ResponseEntity<List<TotalExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(
-			String expense_category, String month, int year, String expense_sub_category, String paid_by) {
-
-		DateDTO dateDTO = null;
-
-		String month_no = expenseTrasactionsRecordsRepository.getMonthNumber(month);
-
-		if (month_no != null) {
-			dateDTO = expenseTrasactionsRecordsRepository.getDateStartEndDate(month_no, year);
-		}
-
-		if (dateDTO.getStart_date() != null && dateDTO.getEnd_date() != null) {
-			if (expense_category != null && expense_sub_category != null && paid_by != null) {
-				totalExpenseTrasactionsRecordsLst = expenseTrasactionsRecordsRepository
-						.getTotalExpenseTrasactionsRecordsByExpenseCategoryAndExpenseSubCategoryAndPaidBy(
-								expense_category, expense_sub_category, dateDTO.getStart_date(), dateDTO.getEnd_date(),
-								paid_by);
-			} else if (expense_category != null && paid_by != null) {
-				totalExpenseTrasactionsRecordsLst = expenseTrasactionsRecordsRepository
-						.getTotalExpenseTrasactionsRecordsByExpenseCategoryAndPaidBy(expense_category,
-								dateDTO.getStart_date(), dateDTO.getEnd_date(), paid_by);
-			} else if (expense_category != null && expense_sub_category != null) {
-				totalExpenseTrasactionsRecordsLst = expenseTrasactionsRecordsRepository
-						.getTotalExpenseTrasactionsRecordsByExpenseCategoryAndExpenseSubCategory(expense_category,
-								expense_sub_category, dateDTO.getStart_date(), dateDTO.getEnd_date());
-			} else if (expense_category != null) {
-				totalExpenseTrasactionsRecordsLst = expenseTrasactionsRecordsRepository
-						.getTotalExpenseTrasactionsRecordsByExpenseCategory(expense_category, dateDTO.getStart_date(),
-								dateDTO.getEnd_date());
-			}
-		}
-
-		if (totalExpenseTrasactionsRecordsLst == null || totalExpenseTrasactionsRecordsLst.isEmpty()) {
-			throw new NullPointerException("Expense transaction records list is null or empty.");
-		}
-		return ResponseEntity.ok(totalExpenseTrasactionsRecordsLst);
-	}
+	
 }

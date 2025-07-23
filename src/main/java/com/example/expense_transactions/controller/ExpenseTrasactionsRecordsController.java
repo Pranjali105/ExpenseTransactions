@@ -137,16 +137,5 @@ public class ExpenseTrasactionsRecordsController {
 		return new ResponseEntity<>(excelBytes, headers, HttpStatus.OK);
 	}
 
-	@PostMapping(value = "/getTotalExpenseTrasactionsRecords/{expense_category}/{month}/{year}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<TotalExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(
-			@PathVariable(required = true) String expense_category, @PathVariable(required = true) String month,
-			@PathVariable(required = true) int year, @RequestParam(required = false) String expense_sub_category,
-			@RequestParam(required = false) String Paid_by) {
-
-		ResponseEntity<List<TotalExpenseTrasactionsRecordsDTO>> totalExpenseTrasactionsRecordsDTODTOLst = expenseTrasactionsRecordsService
-				.getTotalExpenseTrasactionsRecords(expense_category, month, year, expense_sub_category, Paid_by);
-
-		return totalExpenseTrasactionsRecordsDTODTOLst;
-	}
 
 }

@@ -46,36 +46,4 @@ public interface ExpenseTrasactionsRecordsRepository extends JpaRepository<Expen
 			+ "and etr.by_whom = pb.by_whom ORDER BY etr.date desc", nativeQuery = true)
 	List<ExpenseTrasactionsRecordsDTO> getExportExpenseTrasactionsRecords();
 
-	@Query(value = "SELECT STR_TO_DATE(CONCAT(?2, '-', ?1, '-01'), '%Y-%m-%d') AS month_start, LAST_DAY(STR_TO_DATE(CONCAT(?2, '-', ?1, '-01'), '%Y-%m-%d')) AS month_end ", nativeQuery = true)
-	DateDTO getDateStartEndDate(String month, int year);
-
-	@Query(value = "SELECT etr.expenses_category_name, etr.sub_category_name, sum(etr.amount), etr.by_whom\r\n"
-			+ "FROM expense_trasactions_records etr\r\n"
-			+ "WHERE date BETWEEN ?2 AND ?3 and etr.expenses_category_name = ?1 and etr.by_whom = ?4 group by ?1, ?4, etr.amount order by ?1;", nativeQuery = true)
-	List<TotalExpenseTrasactionsRecordsDTO> getTotalExpenseTrasactionsRecordsByExpenseCategoryAndPaidBy(
-			String expense_category, Date start_date, Date end_date, String by_whom);
-
-	@Query(value = "SELECT etr.expenses_category_name, etr.sub_category_name, sum(etr.amount), etr.by_whom\r\n"
-			+ "FROM expense_trasactions_records etr\r\n"
-			+ "WHERE date BETWEEN ?3 AND ?4 and etr.expenses_category_name = ?1 and etr.sub_category_name = ?2 and etr.by_whom = ?5 group by ?1, ?2, ?5, etr.amount order by ?1;", nativeQuery = true)
-	List<TotalExpenseTrasactionsRecordsDTO> getTotalExpenseTrasactionsRecordsByExpenseCategoryAndExpenseSubCategoryAndPaidBy(
-			String expense_category, String expense_sub_category, Date start_date, Date end_date, String by_whom);
-
-	@Query(value = "SELECT etr.expenses_category_name, etr.sub_category_name, sum(etr.amount)\r\n"
-			+ "FROM expense_trasactions_records etr\r\n"
-			+ "WHERE date BETWEEN ?2 AND ?3 and etr.expenses_category_name = ?1 group by ?1, etr.amount order by ?1;", nativeQuery = true)
-	List<TotalExpenseTrasactionsRecordsDTO> getTotalExpenseTrasactionsRecordsByExpenseCategory(String expense_category,
-			Date start_date, Date end_date);
-
-	@Query(value = "SELECT etr.expenses_category_name, etr.sub_category_name, sum(etr.amount)\r\n"
-			+ "FROM expense_trasactions_records etr\r\n"
-			+ "WHERE date BETWEEN ?3 AND ?4 and etr.expenses_category_name = ?1 and etr.sub_category_name = ?2 group by ?1, ?2", nativeQuery = true)
-	List<TotalExpenseTrasactionsRecordsDTO> getTotalExpenseTrasactionsRecordsByExpenseCategoryAndExpenseSubCategory(
-			String expense_category, String expense_sub_category, Date start_date, Date end_date);
-
-	@Query(value = "SELECT MONTH(STR_TO_DATE(?1, '%M')) AS month_number", nativeQuery = true)
-	String getMonthNumber(String month);
-
-	
-
 }

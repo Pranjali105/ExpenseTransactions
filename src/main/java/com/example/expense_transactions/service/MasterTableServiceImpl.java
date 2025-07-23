@@ -2,9 +2,11 @@ package com.example.expense_transactions.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import com.example.expense_transactions.repository.MasterTableRepository;
 
+@Service
 public class MasterTableServiceImpl implements MasterTableService {
 
 	@Autowired

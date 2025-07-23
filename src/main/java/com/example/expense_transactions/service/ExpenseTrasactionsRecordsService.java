@@ -18,7 +18,4 @@ public interface ExpenseTrasactionsRecordsService {
 
 	ResponseEntity<List<ExpenseTrasactionsRecordsDTO>> exportExpenseTrasactionsRecords();
 
-	ResponseEntity<List<TotalExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(String expense_category,
-			String month, int year, String expense_sub_category, String paid_by);
-
 }
