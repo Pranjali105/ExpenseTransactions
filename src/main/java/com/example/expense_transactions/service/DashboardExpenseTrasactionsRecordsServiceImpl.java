@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.expense_transactions.dto.DashboardExpenseTrasactionsRecordsDTO;
 import com.example.expense_transactions.dto.DateDTO;
+import com.example.expense_transactions.dto.TotalExpenseTrasactionsRecordsDTO;
 import com.example.expense_transactions.repository.DashboardExpenseTrasactionsRecordsRepository;
 
 @Service
@@ -21,40 +22,41 @@ public class DashboardExpenseTrasactionsRecordsServiceImpl implements DashboardE
 
 	@Override
 	public ResponseEntity<List<DashboardExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(
-			String expense_category, String month, int year, String paid_by) {
+			TotalExpenseTrasactionsRecordsDTO totalExpenseTrasactionsRecordsDTO) {
 
 		DateDTO dateDTO = null;
 
-		// start and end date when selected both month and yaer
-		if (month != null) {
-			String month_no = dashboardExpenseTrasactionsRecordsRepository.getMonthNumber(month);
+		// start and end date when selected both month and year
+		if (totalExpenseTrasactionsRecordsDTO.getMonth() != null) {
+			String month_no = dashboardExpenseTrasactionsRecordsRepository.getMonthNumber(totalExpenseTrasactionsRecordsDTO.getMonth());
 
 			if (month_no != null) {
-				dateDTO = dashboardExpenseTrasactionsRecordsRepository.geteStartEndDateFromMonthAndYear(month_no, year);
+				dateDTO = dashboardExpenseTrasactionsRecordsRepository.geteStartEndDateFromMonthAndYear(month_no, totalExpenseTrasactionsRecordsDTO.getYear());
 			}
 		}
 		else
 		{
-			dateDTO = dashboardExpenseTrasactionsRecordsRepository.getStartEndDateFromYear(year);
+			// start and end date when selected only year
+			dateDTO = dashboardExpenseTrasactionsRecordsRepository.getStartEndDateFromYear(totalExpenseTrasactionsRecordsDTO.getYear());
 		}
 
-		if (dateDTO.getStart_date() != null && dateDTO.getEnd_date() != null) {
-			 if (expense_category != null && paid_by != null) {
+		if (dateDTO.getStartDate() != null && dateDTO.getEndDate() != null) {
+			 if (totalExpenseTrasactionsRecordsDTO.getExpenseCategory() != null && totalExpenseTrasactionsRecordsDTO.getPaidBy() != null) {
 				dashboardExpenseTrasactionsRecordsLst = dashboardExpenseTrasactionsRecordsRepository
-						.getTotalExpenseTrasactionsRecordsByExpenseCategoryAndPaidBy(expense_category,
-								dateDTO.getStart_date(), dateDTO.getEnd_date(), paid_by);
-			} else if (expense_category != null) {
+						.getTotalExpenseTrasactionsRecordsByExpenseCategoryAndPaidBy(totalExpenseTrasactionsRecordsDTO.getExpenseCategory(),
+								dateDTO.getStartDate(), dateDTO.getEndDate(), totalExpenseTrasactionsRecordsDTO.getPaidBy());
+			} else if (totalExpenseTrasactionsRecordsDTO.getExpenseCategory() != null) {
 				dashboardExpenseTrasactionsRecordsLst = dashboardExpenseTrasactionsRecordsRepository
-						.getTotalExpenseTrasactionsRecordsByExpenseCategory(expense_category, dateDTO.getStart_date(),
-								dateDTO.getEnd_date());
+						.getTotalExpenseTrasactionsRecordsByExpenseCategory(totalExpenseTrasactionsRecordsDTO.getExpenseCategory(), dateDTO.getStartDate(),
+								dateDTO.getEndDate());
 			}
-			else if(paid_by != null)
+			else if(totalExpenseTrasactionsRecordsDTO.getPaidBy() != null)
 			{
-				dashboardExpenseTrasactionsRecordsLst = dashboardExpenseTrasactionsRecordsRepository.getTotalExpenseTrasactionsRecordsByPaidBy(dateDTO.getStart_date(), dateDTO.getEnd_date(), paid_by);
+				dashboardExpenseTrasactionsRecordsLst = dashboardExpenseTrasactionsRecordsRepository.getTotalExpenseTrasactionsRecordsByPaidBy(dateDTO.getStartDate(), dateDTO.getEndDate(), totalExpenseTrasactionsRecordsDTO.getPaidBy());
 			}
 			else
 			{
-				dashboardExpenseTrasactionsRecordsLst = dashboardExpenseTrasactionsRecordsRepository.getTotalExpenseTrasactionsRecords(dateDTO.getStart_date(), dateDTO.getEnd_date());
+				dashboardExpenseTrasactionsRecordsLst = dashboardExpenseTrasactionsRecordsRepository.getTotalExpenseTrasactionsRecords(dateDTO.getStartDate(), dateDTO.getEndDate());
 			}
 		}
 

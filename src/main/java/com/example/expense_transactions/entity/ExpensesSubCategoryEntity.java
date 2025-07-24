@@ -13,35 +13,36 @@ public class ExpensesSubCategoryEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int sub_category_id;
+	private int subCategoryId;
 
 	@Column(name = "expenses_category_id")
-	private int expenses_category_id;
+	private int expensesCategoryId;
 
 	@Column(name = "sub_category_name")
-	private String sub_category_name;
+	private String subCategoryName;
 
-	public int getSub_category_id() {
-		return sub_category_id;
+	public int getSubCategoryId() {
+		return subCategoryId;
 	}
 
-	public void setSub_category_id(int sub_category_id) {
-		this.sub_category_id = sub_category_id;
+	public void setSubCategoryId(int subCategoryId) {
+		this.subCategoryId = subCategoryId;
 	}
 
-	public int getExpenses_category_id() {
-		return expenses_category_id;
+	public int getExpensesCategoryId() {
+		return expensesCategoryId;
 	}
 
-	public void setExpenses_category_id(int expenses_category_id) {
-		this.expenses_category_id = expenses_category_id;
+	public void setExpensesCategoryId(int expensesCategoryId) {
+		this.expensesCategoryId = expensesCategoryId;
 	}
 
-	public String getSub_category_name() {
-		return sub_category_name;
+	public String getSubCategoryName() {
+		return subCategoryName;
 	}
 
-	public void setSub_category_name(String sub_category_name) {
-		this.sub_category_name = sub_category_name;
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
 	}
+
 }

@@ -24,11 +24,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.expense_transactions.dto.ExpenseTrasactionsRecordsDTO;
-import com.example.expense_transactions.dto.TotalExpenseTrasactionsRecordsDTO;
 import com.example.expense_transactions.service.ExpenseTrasactionsRecordsService;
 
 @RestController
@@ -95,7 +93,7 @@ public class ExpenseTrasactionsRecordsController {
 		int rowNum = 1;
 		for (ExpenseTrasactionsRecordsDTO trasactionsRecordsDTO : recordsDTOs) {
 			Row row = sheet.createRow(rowNum++);
-			row.createCell(0).setCellValue(trasactionsRecordsDTO.getRow_no());
+			row.createCell(0).setCellValue(trasactionsRecordsDTO.getRowNo());
 
 			// Create a cell style for yyyy-MM-dd format
 			CellStyle dateCellStyle = workbook.createCellStyle();
@@ -111,9 +109,9 @@ public class ExpenseTrasactionsRecordsController {
 			row.createCell(2).setCellValue(trasactionsRecordsDTO.getExpense());
 			row.createCell(3).setCellValue(trasactionsRecordsDTO.getType());
 			row.createCell(4).setCellValue(trasactionsRecordsDTO.getAmount());
-			row.createCell(5).setCellValue(trasactionsRecordsDTO.getPayment_mode());
-			row.createCell(6).setCellValue(trasactionsRecordsDTO.getPayment_mode_type());
-			row.createCell(7).setCellValue(trasactionsRecordsDTO.getBy_whom());
+			row.createCell(5).setCellValue(trasactionsRecordsDTO.getPaymentMode());
+			row.createCell(6).setCellValue(trasactionsRecordsDTO.getPaymentModeType());
+			row.createCell(7).setCellValue(trasactionsRecordsDTO.getByWhom());
 		}
 
 		// Write Excel to byte array
@@ -136,6 +134,5 @@ public class ExpenseTrasactionsRecordsController {
 
 		return new ResponseEntity<>(excelBytes, headers, HttpStatus.OK);
 	}
-
 
 }

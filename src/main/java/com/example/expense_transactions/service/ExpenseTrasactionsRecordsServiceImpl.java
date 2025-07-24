@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.example.expense_transactions.dto.DateDTO;
 import com.example.expense_transactions.dto.ExpenseTrasactionsRecordsDTO;
-import com.example.expense_transactions.dto.TotalExpenseTrasactionsRecordsDTO;
 import com.example.expense_transactions.repository.ExpenseTrasactionsRecordsRepository;
 
 @Service
@@ -19,8 +17,6 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 	ExpenseTrasactionsRecordsRepository expenseTrasactionsRecordsRepository;
 
 	List<ExpenseTrasactionsRecordsDTO> expenseTrasactionsRecordsLst = new ArrayList<ExpenseTrasactionsRecordsDTO>();
-
-	List<TotalExpenseTrasactionsRecordsDTO> totalExpenseTrasactionsRecordsLst = new ArrayList<TotalExpenseTrasactionsRecordsDTO>();
 
 	@Override
 	public ResponseEntity<List<ExpenseTrasactionsRecordsDTO>> getExpenseTrasactionsRecords() {
@@ -39,8 +35,8 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 
 		int n = expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(expenseTrasactionsRecordsDTO.getDate(),
 				expenseTrasactionsRecordsDTO.getExpense(), expenseTrasactionsRecordsDTO.getType(),
-				expenseTrasactionsRecordsDTO.getAmount(), expenseTrasactionsRecordsDTO.getPayment_mode(),
-				expenseTrasactionsRecordsDTO.getPayment_mode_type(), expenseTrasactionsRecordsDTO.getBy_whom());
+				expenseTrasactionsRecordsDTO.getAmount(), expenseTrasactionsRecordsDTO.getPaymentMode(),
+				expenseTrasactionsRecordsDTO.getPaymentModeType(), expenseTrasactionsRecordsDTO.getByWhom());
 
 		if (n == 0) {
 			return ResponseEntity.ok("Error occured while inserting the data");
@@ -55,8 +51,8 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 		int n = expenseTrasactionsRecordsRepository.updateExpenseTrasactionsRecords(id,
 				expenseTrasactionsRecordsDTO.getDate(), expenseTrasactionsRecordsDTO.getExpense(),
 				expenseTrasactionsRecordsDTO.getType(), expenseTrasactionsRecordsDTO.getAmount(),
-				expenseTrasactionsRecordsDTO.getPayment_mode(), expenseTrasactionsRecordsDTO.getPayment_mode_type(),
-				expenseTrasactionsRecordsDTO.getBy_whom());
+				expenseTrasactionsRecordsDTO.getPaymentMode(), expenseTrasactionsRecordsDTO.getPaymentModeType(),
+				expenseTrasactionsRecordsDTO.getByWhom());
 
 		if (n == 0) {
 			return ResponseEntity.ok("Error occured while updating the data");
@@ -73,5 +69,5 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 		}
 		return ResponseEntity.ok(expenseTrasactionsRecordsLst);
 	}
-	
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.example.expense_transactions.dto.DateDTO;
 import com.example.expense_transactions.dto.ExpenseTrasactionsRecordsDTO;
@@ -14,6 +15,7 @@ import com.example.expense_transactions.entity.ExpenseTrasactionsRecordsEntity;
 
 import jakarta.transaction.Transactional;
 
+@Repository
 public interface ExpenseTrasactionsRecordsRepository extends JpaRepository<ExpenseTrasactionsRecordsEntity, Integer> {
 
 	@Query(value = "SELECT etr.id, etr.date, etr.expenses_category_name, etr.sub_category_name, etr.amount, etr.payment_mode_name, etr.type_name, etr.by_whom\r\n"

@@ -10,39 +10,39 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "payment_mode_type")
 public class PaymentModeTypeEntity {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int payment_mode_type_id;
-	
+	private int paymentModeTypeId;
+
 	@Column(name = "payment_mode_id0")
-	private int payment_mode_id;
-	
+	private int paymentModeId;
+
 	@Column(name = "type_name")
-	private String type_name;
+	private String typeName;
 
-	public int getPayment_mode_type_id() {
-		return payment_mode_type_id;
+	public int getPaymentModeTypeId() {
+		return paymentModeTypeId;
 	}
 
-	public void setPayment_mode_type_id(int payment_mode_type_id) {
-		this.payment_mode_type_id = payment_mode_type_id;
+	public void setPaymentModeTypeId(int paymentModeTypeId) {
+		this.paymentModeTypeId = paymentModeTypeId;
 	}
 
-	public int getPayment_mode_id() {
-		return payment_mode_id;
+	public int getPaymentModeId() {
+		return paymentModeId;
 	}
 
-	public void setPayment_mode_id(int payment_mode_id) {
-		this.payment_mode_id = payment_mode_id;
+	public void setPaymentModeId(int paymentModeId) {
+		this.paymentModeId = paymentModeId;
 	}
 
-	public String getType_name() {
-		return type_name;
+	public String getTypeName() {
+		return typeName;
 	}
 
-	public void setType_name(String type_name) {
-		this.type_name = type_name;
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 
 }

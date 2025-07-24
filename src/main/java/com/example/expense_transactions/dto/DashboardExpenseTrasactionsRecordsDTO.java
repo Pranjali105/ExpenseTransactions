@@ -4,56 +4,56 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class DashboardExpenseTrasactionsRecordsDTO {
 
-	private String category_name;
+	private String categoryName;
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private String subCategory_name;
+	private String subCategoryName;
 
 	private double amount;
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
-	private String by_whom;
+	private String byWhom;
 
 	public DashboardExpenseTrasactionsRecordsDTO() {
 		super();
 	}
 
-	public DashboardExpenseTrasactionsRecordsDTO(String category_name, String subCategory_name, double amount,
-			String by_whom) {
+	public DashboardExpenseTrasactionsRecordsDTO(String categoryName, String subCategoryName, double amount,
+			String byWhom) {
 		super();
-		this.category_name = category_name;
-		this.subCategory_name = subCategory_name;
+		this.categoryName = categoryName;
+		this.subCategoryName = subCategoryName;
 		this.amount = amount;
-		this.by_whom = by_whom;
+		this.byWhom = byWhom;
 	}
 
-	public DashboardExpenseTrasactionsRecordsDTO(String category_name, double amount) {
+	public DashboardExpenseTrasactionsRecordsDTO(String categoryName, double amount) {
 		super();
-		this.category_name = category_name;
-		this.amount = amount;
-	}
-
-	public DashboardExpenseTrasactionsRecordsDTO(String category_name, String subCategory_name, double amount) {
-		super();
-		this.category_name = category_name;
-		this.subCategory_name = subCategory_name;
+		this.categoryName = categoryName;
 		this.amount = amount;
 	}
 
-	public String getCategory_name() {
-		return category_name;
+	public DashboardExpenseTrasactionsRecordsDTO(String category_name, String subCategoryName, double amount) {
+		super();
+		this.categoryName = category_name;
+		this.subCategoryName = subCategoryName;
+		this.amount = amount;
 	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public String getSubCategory_name() {
-		return subCategory_name;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
-	public void setSubCategory_name(String subCategory_name) {
-		this.subCategory_name = subCategory_name;
+	public String getSubCategoryName() {
+		return subCategoryName;
+	}
+
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
 	}
 
 	public double getAmount() {
@@ -64,12 +64,11 @@ public class DashboardExpenseTrasactionsRecordsDTO {
 		this.amount = amount;
 	}
 
-	public String getBy_whom() {
-		return by_whom;
+	public String getByWhom() {
+		return byWhom;
 	}
 
-	public void setBy_whom(String by_whom) {
-		this.by_whom = by_whom;
+	public void setByWhom(String byWhom) {
+		this.byWhom = byWhom;
 	}
-
 }

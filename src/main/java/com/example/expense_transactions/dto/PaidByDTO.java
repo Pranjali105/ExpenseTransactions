@@ -5,35 +5,31 @@ import org.springframework.lang.NonNull;
 public class PaidByDTO {
 
 	@NonNull
-	private int paid_by_id;
+	private int paidById;
 
 	@NonNull
-	private String by_whom;
+	private String byWhom;
 
-	public PaidByDTO(int paid_by_id, String by_whom) {
+	public PaidByDTO(int paidById, String byWhom) {
 		super();
-		this.paid_by_id = paid_by_id;
-		this.by_whom = by_whom;
+		this.paidById = paidById;
+		this.byWhom = byWhom;
 	}
 
-	public int getPaid_by_id() {
-		return paid_by_id;
+	public int getPaidById() {
+		return paidById;
 	}
 
-	public void setPaid_by_id(int paid_by_id) {
-		this.paid_by_id = paid_by_id;
+	public void setPaidById(int paidById) {
+		this.paidById = paidById;
 	}
 
-	public String getBy_whom() {
-		return by_whom;
+	public String getByWhom() {
+		return byWhom;
 	}
 
-	public void setBy_whom(String by_whom) {
-		this.by_whom = by_whom;
+	public void setByWhom(String byWhom) {
+		this.byWhom = byWhom;
 	}
 
-	@Override
-	public String toString() {
-		return "paid_by_DTO [paid_by_id=" + paid_by_id + ", by_whom=" + by_whom + "]";
-	}
 }

@@ -13,25 +13,25 @@ public class PaymentModeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int payment_mode_id;
+	private int paymentModeId;
 
 	@Column(name = "payment_mode_name")
-	private String payment_mode_name;
+	private String paymentModeName;
 
-	public int getPayment_mode_id() {
-		return payment_mode_id;
+	public int getPaymentModeId() {
+		return paymentModeId;
 	}
 
-	public void setPayment_mode_id(int payment_mode_id) {
-		this.payment_mode_id = payment_mode_id;
+	public void setPaymentModeId(int paymentModeId) {
+		this.paymentModeId = paymentModeId;
 	}
 
-	public String getPayment_mode_name() {
-		return payment_mode_name;
+	public String getPaymentModeName() {
+		return paymentModeName;
 	}
 
-	public void setPayment_mode_name(String payment_mode_name) {
-		this.payment_mode_name = payment_mode_name;
+	public void setPaymentModeName(String paymentModeName) {
+		this.paymentModeName = paymentModeName;
 	}
 
 }

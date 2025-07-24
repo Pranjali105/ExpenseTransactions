@@ -13,25 +13,25 @@ public class PaidByEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int paid_by_id;
+	private int paidById;
 
 	@Column(name = "by_whom")
-	private String by_whom;
+	private String byWhom;
 
-	public int getPaid_by_id() {
-		return paid_by_id;
+	public int getPaidById() {
+		return paidById;
 	}
 
-	public void setPaid_by_id(int paid_by_id) {
-		this.paid_by_id = paid_by_id;
+	public void setPaidById(int paidById) {
+		this.paidById = paidById;
 	}
 
-	public String getBy_whom() {
-		return by_whom;
+	public String getByWhom() {
+		return byWhom;
 	}
 
-	public void setBy_whom(String by_whom) {
-		this.by_whom = by_whom;
+	public void setByWhom(String byWhom) {
+		this.byWhom = byWhom;
 	}
 
 }

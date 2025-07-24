@@ -5,49 +5,43 @@ import org.springframework.lang.NonNull;
 public class PaymentModeTypeDTO {
 
 	@NonNull
-	private int payment_mode_type_id;
+	private int paymentModeTypeId;
 
 	@NonNull
-	private int payment_mode_id;
+	private int paymentMdeId;
 
 	@NonNull
-	private String type_name;
+	private String typeName;
 
-	public PaymentModeTypeDTO(int payment_mode_type_id, int payment_mode_id, String type_name) {
+	public PaymentModeTypeDTO(int paymentModeTypeId, int paymentMdeId, String typeName) {
 		super();
-		this.payment_mode_type_id = payment_mode_type_id;
-		this.payment_mode_id = payment_mode_id;
-		this.type_name = type_name;
+		this.paymentModeTypeId = paymentModeTypeId;
+		this.paymentMdeId = paymentMdeId;
+		this.typeName = typeName;
 	}
 
-	public int getPayment_mode_type_id() {
-		return payment_mode_type_id;
+	public int getPaymentModeTypeId() {
+		return paymentModeTypeId;
 	}
 
-	public void setPayment_mode_type_id(int payment_mode_type_id) {
-		this.payment_mode_type_id = payment_mode_type_id;
+	public void setPaymentModeTypeId(int paymentModeTypeId) {
+		this.paymentModeTypeId = paymentModeTypeId;
 	}
 
-	public int getPayment_mode_id() {
-		return payment_mode_id;
+	public int getPaymentMdeId() {
+		return paymentMdeId;
 	}
 
-	public void setPayment_mode_id(int payment_mode_id) {
-		this.payment_mode_id = payment_mode_id;
+	public void setPaymentMdeId(int paymentMdeId) {
+		this.paymentMdeId = paymentMdeId;
 	}
 
-	public String getType_name() {
-		return type_name;
+	public String getTypeName() {
+		return typeName;
 	}
 
-	public void setType_name(String type_name) {
-		this.type_name = type_name;
-	}
-
-	@Override
-	public String toString() {
-		return "payment_mode_type_DTO [payment_mode_type_id=" + payment_mode_type_id + ", payment_mode_id="
-				+ payment_mode_id + ", type_name=" + type_name + "]";
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 
 }

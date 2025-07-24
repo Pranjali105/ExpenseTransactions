@@ -21,37 +21,37 @@ public class ExpenseTrasactionsRecordsEntity {
 	private Date date;
 
 	@Column(name = "expenses_category_name")
-	private String expenses_category_name;
+	private String expensesCategoryName;
 
 	@Column(name = "sub_category_name")
-	private String sub_category_name;
+	private String subCategoryName;
 
 	@Column(name = "amount")
 	private double amount;
 
 	@Column(name = "payment_mode_name")
-	private String payment_mode_name;
+	private String paymentModeName;
 
 	@Column(name = "type_name")
-	private String type_name;
+	private String typeName;
 
 	@Column(name = "by_whom")
-	private String by_whom;
+	private String byWhom;
 
 	public ExpenseTrasactionsRecordsEntity() {
 		super();
 	}
 
-	public ExpenseTrasactionsRecordsEntity(Date date, String expenses_category_name, String sub_category_name,
-			double amount, String payment_mode_name, String type_name, String by_whom) {
+	public ExpenseTrasactionsRecordsEntity(Date date, String expensesCategoryName, String subCategoryName,
+			double amount, String paymentModeName, String typeName, String byWhom) {
 		super();
 		this.date = date;
-		this.expenses_category_name = expenses_category_name;
-		this.sub_category_name = sub_category_name;
+		this.expensesCategoryName = expensesCategoryName;
+		this.subCategoryName = subCategoryName;
 		this.amount = amount;
-		this.payment_mode_name = payment_mode_name;
-		this.type_name = type_name;
-		this.by_whom = by_whom;
+		this.paymentModeName = paymentModeName;
+		this.typeName = typeName;
+		this.byWhom = byWhom;
 	}
 
 	public int getId() {
@@ -70,20 +70,20 @@ public class ExpenseTrasactionsRecordsEntity {
 		this.date = date;
 	}
 
-	public String getExpenses_category_name() {
-		return expenses_category_name;
+	public String getExpensesCategoryName() {
+		return expensesCategoryName;
 	}
 
-	public void setExpenses_category_name(String expenses_category_name) {
-		this.expenses_category_name = expenses_category_name;
+	public void setExpensesCategoryName(String expensesCategoryName) {
+		this.expensesCategoryName = expensesCategoryName;
 	}
 
-	public String getSub_category_name() {
-		return sub_category_name;
+	public String getSubCategoryName() {
+		return subCategoryName;
 	}
 
-	public void setSub_category_name(String sub_category_name) {
-		this.sub_category_name = sub_category_name;
+	public void setSubCategoryName(String subCategoryName) {
+		this.subCategoryName = subCategoryName;
 	}
 
 	public double getAmount() {
@@ -94,28 +94,28 @@ public class ExpenseTrasactionsRecordsEntity {
 		this.amount = amount;
 	}
 
-	public String getPayment_mode_name() {
-		return payment_mode_name;
+	public String getPaymentModeName() {
+		return paymentModeName;
 	}
 
-	public void setPayment_mode_name(String payment_mode_name) {
-		this.payment_mode_name = payment_mode_name;
+	public void setPaymentModeName(String paymentModeName) {
+		this.paymentModeName = paymentModeName;
 	}
 
-	public String getType_name() {
-		return type_name;
+	public String getTypeName() {
+		return typeName;
 	}
 
-	public void setType_name(String type_name) {
-		this.type_name = type_name;
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
 	}
 
-	public String getBy_whom() {
-		return by_whom;
+	public String getByWhom() {
+		return byWhom;
 	}
 
-	public void setBy_whom(String by_whom) {
-		this.by_whom = by_whom;
+	public void setByWhom(String byWhom) {
+		this.byWhom = byWhom;
 	}
 
 }

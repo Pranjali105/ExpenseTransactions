@@ -5,36 +5,31 @@ import org.springframework.lang.NonNull;
 public class PaymentModeDTO {
 
 	@NonNull
-	private int payment_mode_id;
+	private int paymentModeId;
 
 	@NonNull
-	private String payment_mode_name;
+	private String paymentModeName;
 
-	public PaymentModeDTO(int payment_mode_id, String payment_mode_name) {
+	public PaymentModeDTO(int paymentModeId, String paymentModeName) {
 		super();
-		this.payment_mode_id = payment_mode_id;
-		this.payment_mode_name = payment_mode_name;
+		this.paymentModeId = paymentModeId;
+		this.paymentModeName = paymentModeName;
 	}
 
-	public int getPayment_mode_id() {
-		return payment_mode_id;
+	public int getPaymentModeId() {
+		return paymentModeId;
 	}
 
-	public void setPayment_mode_id(int payment_mode_id) {
-		this.payment_mode_id = payment_mode_id;
+	public void setPaymentModeId(int paymentModeId) {
+		this.paymentModeId = paymentModeId;
 	}
 
-	public String getPayment_mode_name() {
-		return payment_mode_name;
+	public String getPaymentModeName() {
+		return paymentModeName;
 	}
 
-	public void setPayment_mode_name(String payment_mode_name) {
-		this.payment_mode_name = payment_mode_name;
+	public void setPaymentModeName(String paymentModeName) {
+		this.paymentModeName = paymentModeName;
 	}
 
-	@Override
-	public String toString() {
-		return "payment_mode_DTO [payment_mode_id=" + payment_mode_id + ", payment_mode_name=" + payment_mode_name
-				+ "]";
-	}
 }

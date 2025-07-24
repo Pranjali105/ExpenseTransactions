@@ -13,24 +13,25 @@ public class ExpensesCategoryEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int expenses_category_id;
+	private int expensesCategoryId;
 
 	@Column(name = "expenses_category_name")
-	private String expenses_category_name;
+	private String expensesCategoryName;
 
-	public int getExpenses_category_id() {
-		return expenses_category_id;
+	public int getExpensesCategoryId() {
+		return expensesCategoryId;
 	}
 
-	public void setExpenses_category_id(int expenses_category_id) {
-		this.expenses_category_id = expenses_category_id;
+	public void setExpensesCategoryId(int expensesCategoryId) {
+		this.expensesCategoryId = expensesCategoryId;
 	}
 
-	public String getExpenses_category_name() {
-		return expenses_category_name;
+	public String getExpensesCategoryName() {
+		return expensesCategoryName;
 	}
 
-	public void setExpenses_category_name(String expenses_category_name) {
-		this.expenses_category_name = expenses_category_name;
+	public void setExpensesCategoryName(String expensesCategoryName) {
+		this.expensesCategoryName = expensesCategoryName;
 	}
+
 }

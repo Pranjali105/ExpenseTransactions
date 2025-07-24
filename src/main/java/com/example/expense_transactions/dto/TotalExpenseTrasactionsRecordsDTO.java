@@ -1,66 +1,53 @@
 package com.example.expense_transactions.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 public class TotalExpenseTrasactionsRecordsDTO {
 
-	private String expense;
+	private String expenseCategory;
 
-	private String type;
+	private String month;
 
-	private double amount;
+	private int year;
 
-	@JsonIgnore
-	private String paid_by;
+	private String paidBy;
 
-	public TotalExpenseTrasactionsRecordsDTO() {
+	public TotalExpenseTrasactionsRecordsDTO(String expenseCategory, String month, int year, String paidBy) {
 		super();
+		this.expenseCategory = expenseCategory;
+		this.month = month;
+		this.year = year;
+		this.paidBy = paidBy;
 	}
 
-	public TotalExpenseTrasactionsRecordsDTO(String expense, String type, double amount, String paid_by) {
-		super();
-		this.expense = expense;
-		this.type = type;
-		this.amount = amount;
-		this.paid_by = paid_by;
+	public String getExpenseCategory() {
+		return expenseCategory;
 	}
 
-	public TotalExpenseTrasactionsRecordsDTO(String expense, String type, double amount) {
-		super();
-		this.expense = expense;
-		this.type = type;
-		this.amount = amount;
+	public void setExpenseCategory(String expenseCategory) {
+		this.expenseCategory = expenseCategory;
 	}
 
-	public String getExpense() {
-		return expense;
+	public String getMonth() {
+		return month;
 	}
 
-	public void setExpense(String expense) {
-		this.expense = expense;
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
-	public String getType() {
-		return type;
+	public int getYear() {
+		return year;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setYear(int year) {
+		this.year = year;
 	}
 
-	public double getAmount() {
-		return amount;
+	public String getPaidBy() {
+		return paidBy;
 	}
 
-	public void setAmount(double amount) {
-		this.amount = amount;
+	public void setPaidBy(String paidBy) {
+		this.paidBy = paidBy;
 	}
 
-	public String getPaid_by() {
-		return paid_by;
-	}
-
-	public void setPaid_by(String paid_by) {
-		this.paid_by = paid_by;
-	}
 }

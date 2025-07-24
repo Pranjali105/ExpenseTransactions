@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ExpenseTrasactionsRecordsDTO {
 	private int id;
-	
+
 	@JsonIgnore
-	private long row_no;
+	private long rowNo;
 
 	private Date date;
 
@@ -18,41 +18,41 @@ public class ExpenseTrasactionsRecordsDTO {
 
 	private double amount;
 
-	private String payment_mode;
+	private String paymentMode;
 
-	private String payment_mode_type;
+	private String paymentModeType;
 
-	private String by_whom;
+	private String byWhom;
 
 	public ExpenseTrasactionsRecordsDTO() {
 		super();
 	}
 
-	public ExpenseTrasactionsRecordsDTO(int id, long row_no, Date date, String expense, String type, double amount,
-			String payment_mode, String payment_mode_type, String by_whom) {
+	public ExpenseTrasactionsRecordsDTO(int id, long rowNo, Date date, String expense, String type, double amount,
+			String paymentMode, String paymentModeType, String byWhom) {
 		super();
 		this.id = id;
-		this.row_no = row_no;
+		this.rowNo = rowNo;
 		this.date = date;
 		this.expense = expense;
 		this.type = type;
 		this.amount = amount;
-		this.payment_mode = payment_mode;
-		this.payment_mode_type = payment_mode_type;
-		this.by_whom = by_whom;
+		this.paymentMode = paymentMode;
+		this.paymentModeType = paymentModeType;
+		this.byWhom = byWhom;
 	}
 
 	public ExpenseTrasactionsRecordsDTO(int id, Date date, String expense, String type, double amount,
-			String payment_mode, String payment_mode_type, String by_whom) {
+			String paymentMode, String paymentModeType, String byWhom) {
 		super();
 		this.id = id;
 		this.date = date;
 		this.expense = expense;
 		this.type = type;
 		this.amount = amount;
-		this.payment_mode = payment_mode;
-		this.payment_mode_type = payment_mode_type;
-		this.by_whom = by_whom;
+		this.paymentMode = paymentMode;
+		this.paymentModeType = paymentModeType;
+		this.byWhom = byWhom;
 	}
 
 	public int getId() {
@@ -63,12 +63,12 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.id = id;
 	}
 
-	public long getRow_no() {
-		return row_no;
+	public long getRowNo() {
+		return rowNo;
 	}
 
-	public void setRow_no(long row_no) {
-		this.row_no = row_no;
+	public void setRowNo(long rowNo) {
+		this.rowNo = rowNo;
 	}
 
 	public Date getDate() {
@@ -103,34 +103,28 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.amount = amount;
 	}
 
-	public String getPayment_mode() {
-		return payment_mode;
+	public String getPaymentMode() {
+		return paymentMode;
 	}
 
-	public void setPayment_mode(String payment_mode) {
-		this.payment_mode = payment_mode;
+	public void setPaymentMode(String paymentMode) {
+		this.paymentMode = paymentMode;
 	}
 
-	public String getPayment_mode_type() {
-		return payment_mode_type;
+	public String getPaymentModeType() {
+		return paymentModeType;
 	}
 
-	public void setPayment_mode_type(String payment_mode_type) {
-		this.payment_mode_type = payment_mode_type;
+	public void setPaymentModeType(String paymentModeType) {
+		this.paymentModeType = paymentModeType;
 	}
 
-	public String getBy_whom() {
-		return by_whom;
+	public String getByWhom() {
+		return byWhom;
 	}
 
-	public void setBy_whom(String by_whom) {
-		this.by_whom = by_whom;
+	public void setByWhom(String byWhom) {
+		this.byWhom = byWhom;
 	}
 
-	@Override
-	public String toString() {
-		return "ExpenseTrasactionsRecordsDTO [id=" + id + ", row_no=" + row_no + ", date=" + date + ", expense="
-				+ expense + ", type=" + type + ", amount=" + amount + ", payment_mode=" + payment_mode
-				+ ", payment_mode_type=" + payment_mode_type + ", by_whom=" + by_whom + "]";
-	}
 }

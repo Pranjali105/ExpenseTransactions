@@ -5,37 +5,31 @@ import org.springframework.lang.NonNull;
 public class ExpensesCategoryDTO {
 
 	@NonNull
-	private int expenses_category_id;
+	private int expensesCategoryId;
 
 	@NonNull
-	private String expenses_category_name;
-
-	public ExpensesCategoryDTO(int expenses_category_id, String expenses_category_name) {
+	private String expensesCategoryName;
+	
+	public ExpensesCategoryDTO(int expensesCategoryId, String expensesCategoryName) {
 		super();
-		this.expenses_category_id = expenses_category_id;
-		this.expenses_category_name = expenses_category_name;
+		this.expensesCategoryId = expensesCategoryId;
+		this.expensesCategoryName = expensesCategoryName;
 	}
 
-	public int getexpenses_category_id() {
-		return expenses_category_id;
+	public int getExpensesCategoryId() {
+		return expensesCategoryId;
 	}
 
-	public void setexpenses_category_name_id(int expenses_category_name_id) {
-		this.expenses_category_id = expenses_category_name_id;
+	public void setExpensesCategoryId(int expensesCategoryId) {
+		this.expensesCategoryId = expensesCategoryId;
 	}
 
-	public String getExpenses_category_name() {
-		return expenses_category_name;
+	public String getExpensesCategoryName() {
+		return expensesCategoryName;
 	}
 
-	public void setExpenses_category_name(String expenses_category_name) {
-		this.expenses_category_name = expenses_category_name;
+	public void setExpensesCategoryName(String expensesCategoryName) {
+		this.expensesCategoryName = expensesCategoryName;
 	}
-
-	@Override
-	public String toString() {
-		return "expenses_category_name_DTO [expenses_category_name_id=" + expenses_category_id + ", expenses_category_name="
-				+ expenses_category_name + "]";
-	}
-
+	
 }
