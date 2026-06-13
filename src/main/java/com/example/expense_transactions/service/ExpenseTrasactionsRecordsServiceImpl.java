@@ -34,7 +34,7 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 			ExpenseTrasactionsRecordsDTO expenseTrasactionsRecordsDTO) {
 
 		int n = expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(expenseTrasactionsRecordsDTO.getDate(),
-				expenseTrasactionsRecordsDTO.getExpense(), expenseTrasactionsRecordsDTO.getType(),
+				expenseTrasactionsRecordsDTO.getExpenseCategory(), expenseTrasactionsRecordsDTO.getExpenseSubCategory(),
 				expenseTrasactionsRecordsDTO.getAmount(), expenseTrasactionsRecordsDTO.getPaymentMode(),
 				expenseTrasactionsRecordsDTO.getPaymentModeType(), expenseTrasactionsRecordsDTO.getByWhom());
 
@@ -49,8 +49,8 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 			ExpenseTrasactionsRecordsDTO expenseTrasactionsRecordsDTO) {
 
 		int n = expenseTrasactionsRecordsRepository.updateExpenseTrasactionsRecords(id,
-				expenseTrasactionsRecordsDTO.getDate(), expenseTrasactionsRecordsDTO.getExpense(),
-				expenseTrasactionsRecordsDTO.getType(), expenseTrasactionsRecordsDTO.getAmount(),
+				expenseTrasactionsRecordsDTO.getDate(), expenseTrasactionsRecordsDTO.getExpenseCategory(),
+				expenseTrasactionsRecordsDTO.getExpenseSubCategory(), expenseTrasactionsRecordsDTO.getAmount(),
 				expenseTrasactionsRecordsDTO.getPaymentMode(), expenseTrasactionsRecordsDTO.getPaymentModeType(),
 				expenseTrasactionsRecordsDTO.getByWhom());
 

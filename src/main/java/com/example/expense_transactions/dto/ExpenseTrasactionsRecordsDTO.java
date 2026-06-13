@@ -12,9 +12,9 @@ public class ExpenseTrasactionsRecordsDTO {
 
 	private Date date;
 
-	private String expense;
+	private String expenseCategory;
 
-	private String type;
+	private String expenseSubCategory;
 
 	private double amount;
 
@@ -34,8 +34,8 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.id = id;
 		this.rowNo = rowNo;
 		this.date = date;
-		this.expense = expense;
-		this.type = type;
+		this.expenseCategory = expense;
+		this.expenseSubCategory = type;
 		this.amount = amount;
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
@@ -47,8 +47,8 @@ public class ExpenseTrasactionsRecordsDTO {
 		super();
 		this.id = id;
 		this.date = date;
-		this.expense = expense;
-		this.type = type;
+		this.expenseCategory = expense;
+		this.expenseSubCategory = type;
 		this.amount = amount;
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
@@ -79,20 +79,20 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.date = date;
 	}
 
-	public String getExpense() {
-		return expense;
+	public String getExpenseCategory() {
+		return expenseCategory;
 	}
 
-	public void setExpense(String expense) {
-		this.expense = expense;
+	public void setExpenseCategory(String expenseCategory) {
+		this.expenseCategory = expenseCategory;
 	}
 
-	public String getType() {
-		return type;
+	public String getExpenseSubCategory() {
+		return expenseSubCategory;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setExpenseSubCategory(String expenseSubCategory) {
+		this.expenseSubCategory = expenseSubCategory;
 	}
 
 	public double getAmount() {

@@ -82,8 +82,8 @@ public class ExpenseTrasactionsRecordsController {
 		Row header = sheet.createRow(0);
 		header.createCell(0).setCellValue("Serial No");
 		header.createCell(1).setCellValue("Date");
-		header.createCell(2).setCellValue("Expense");
-		header.createCell(3).setCellValue("Type");
+		header.createCell(2).setCellValue("ExpenseCategory");
+		header.createCell(3).setCellValue("ExpenseSubCategory");
 		header.createCell(4).setCellValue("Amount");
 		header.createCell(5).setCellValue("Payment Mode");
 		header.createCell(6).setCellValue("Payment Mode Type");
@@ -106,8 +106,8 @@ public class ExpenseTrasactionsRecordsController {
 			dateCell.setCellValue(sqlDate); // set the value
 			dateCell.setCellStyle(dateCellStyle); // apply the format
 
-			row.createCell(2).setCellValue(trasactionsRecordsDTO.getExpense());
-			row.createCell(3).setCellValue(trasactionsRecordsDTO.getType());
+			row.createCell(2).setCellValue(trasactionsRecordsDTO.getExpenseCategory());
+			row.createCell(3).setCellValue(trasactionsRecordsDTO.getExpenseSubCategory());
 			row.createCell(4).setCellValue(trasactionsRecordsDTO.getAmount());
 			row.createCell(5).setCellValue(trasactionsRecordsDTO.getPaymentMode());
 			row.createCell(6).setCellValue(trasactionsRecordsDTO.getPaymentModeType());
