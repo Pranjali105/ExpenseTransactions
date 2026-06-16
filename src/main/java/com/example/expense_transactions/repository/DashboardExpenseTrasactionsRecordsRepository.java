@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.example.expense_transactions.dto.DashboardExpenseCategoryTrasactionsRecordsDTO;
 import com.example.expense_transactions.dto.DashboardExpenseTrasactionsRecordsDTO;
 import com.example.expense_transactions.dto.DateDTO;
 import com.example.expense_transactions.entity.ExpenseTrasactionsRecordsEntity;
@@ -37,9 +38,17 @@ public interface DashboardExpenseTrasactionsRecordsRepository
 			String expense_category, Date start_date, Date end_date);
 
 	@Query(value = "select etr.expenses_category_name, sum(etr.amount) from expense_trasactions_records etr where etr.date between ?1 and ?2 and etr.by_whom = ?3 group by etr.expenses_category_name", nativeQuery = true)
-	List<DashboardExpenseTrasactionsRecordsDTO> getTotalExpenseTrasactionsRecordsByPaidBy(Date start_date, Date end_date, String paid_by);
+	List<DashboardExpenseTrasactionsRecordsDTO> getTotalExpenseTrasactionsRecordsByPaidBy(Date start_date,
+			Date end_date, String paid_by);
 
 	@Query(value = "select etr.expenses_category_name, sum(etr.amount) from expense_trasactions_records etr where etr.date between ?1 and ?2 group by etr.expenses_category_name", nativeQuery = true)
 	List<DashboardExpenseTrasactionsRecordsDTO> getTotalExpenseTrasactionsRecords(Date start_date, Date end_date);
+
+	@Query(value = "select etr.expenses_category_name, sum(etr.amount), etr.by_whom from expense_trasactions_records etr where etr.date between ?1 and ?2 and etr.by_whom = ?3 group by etr.expenses_category_name", nativeQuery = true)
+	List<DashboardExpenseCategoryTrasactionsRecordsDTO> getTotalAllExpenseTrasactionsRecordsByPaidBy(Date start_date,
+			Date end_date, String paid_by);
+
+	@Query(value = "select etr.expenses_category_name, sum(etr.amount), etr.by_whom from expense_trasactions_records etr where etr.date between ?1 and ?2 group by etr.by_whom", nativeQuery = true)
+	List<DashboardExpenseCategoryTrasactionsRecordsDTO> getTotalAllExpenseTrasactionsRecords(Date start_date, Date end_date);
 
 }
