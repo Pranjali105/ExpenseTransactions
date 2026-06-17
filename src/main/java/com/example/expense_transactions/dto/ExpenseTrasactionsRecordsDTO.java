@@ -23,13 +23,15 @@ public class ExpenseTrasactionsRecordsDTO {
 	private String paymentModeType;
 
 	private String byWhom;
+	
+	private String accountNo;
 
 	public ExpenseTrasactionsRecordsDTO() {
 		super();
 	}
 
 	public ExpenseTrasactionsRecordsDTO(int id, long rowNo, Date date, String expense, String type, double amount,
-			String paymentMode, String paymentModeType, String byWhom) {
+			String paymentMode, String paymentModeType, String byWhom, String accountNo) {
 		super();
 		this.id = id;
 		this.rowNo = rowNo;
@@ -40,10 +42,11 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
 		this.byWhom = byWhom;
+		this.accountNo = accountNo;
 	}
 
 	public ExpenseTrasactionsRecordsDTO(int id, Date date, String expense, String type, double amount,
-			String paymentMode, String paymentModeType, String byWhom) {
+			String paymentMode, String paymentModeType, String byWhom, String accountNo) {
 		super();
 		this.id = id;
 		this.date = date;
@@ -53,6 +56,7 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
 		this.byWhom = byWhom;
+		this.accountNo = accountNo;
 	}
 
 	public int getId() {
@@ -125,6 +129,14 @@ public class ExpenseTrasactionsRecordsDTO {
 
 	public void setByWhom(String byWhom) {
 		this.byWhom = byWhom;
+	}
+	
+	public String getAccountNo() {
+		return accountNo;
+	}
+	
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 
 }

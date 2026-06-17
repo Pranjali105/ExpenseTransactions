@@ -10,7 +10,7 @@ import com.example.expense_transactions.entity.ExpensesCategoryEntity;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface MasterTableRepository extends JpaRepository<ExpensesCategoryEntity, Integer>{
+public interface MasterTableRepository extends JpaRepository<ExpensesCategoryEntity, Integer> {
 
 	@Modifying
 	@Transactional
@@ -27,5 +27,12 @@ public interface MasterTableRepository extends JpaRepository<ExpensesCategoryEnt
 			+ "	FROM DUAL WHERE NOT EXISTS \r\n"
 			+ "		(SELECT 1 FROM expenses_category ec, expenses_sub_category esc WHERE ec.expenses_category_name = ?1 and esc.sub_category_name = ?2)", nativeQuery = true)
 	int addSubCategory(String category, String subCategory);
-	
+
+	@Modifying
+	@Transactional
+	@Query(value = "INSERT INTO account_details(account_no, account_holder_name, bank_name)\r\n"
+			+ "SELECT ?1, ?2, ?3\r\n" + "FROM DUAL\r\n" + "WHERE NOT EXISTS (\r\n"
+			+ "    SELECT 1 FROM account_details WHERE account_no = ?1)", nativeQuery = true)
+	int addAccountDetails(String accountNumber, String accountHolderName, String bankName);
+
 }

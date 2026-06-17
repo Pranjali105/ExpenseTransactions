@@ -88,6 +88,7 @@ public class ExpenseTrasactionsRecordsController {
 		header.createCell(5).setCellValue("Payment Mode");
 		header.createCell(6).setCellValue("Payment Mode Type");
 		header.createCell(7).setCellValue("Paid By");
+		header.createCell(8).setCellValue("Account Number");
 
 		// Data rows
 		int rowNum = 1;
@@ -112,6 +113,7 @@ public class ExpenseTrasactionsRecordsController {
 			row.createCell(5).setCellValue(trasactionsRecordsDTO.getPaymentMode());
 			row.createCell(6).setCellValue(trasactionsRecordsDTO.getPaymentModeType());
 			row.createCell(7).setCellValue(trasactionsRecordsDTO.getByWhom());
+			row.createCell(8).setCellValue(trasactionsRecordsDTO.getAccountNo());
 		}
 
 		// Write Excel to byte array

@@ -33,26 +33,49 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 	public ResponseEntity<String> addExpenseTrasactionsRecords(
 			ExpenseTrasactionsRecordsDTO expenseTrasactionsRecordsDTO) {
 
-		int n = expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(expenseTrasactionsRecordsDTO.getDate(),
+		boolean is12DigitNumber = is12DigitNumber(expenseTrasactionsRecordsDTO.getAccountNo());
+		int n = 0;
+		
+		if(is12DigitNumber == true) {
+		
+		n = expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(expenseTrasactionsRecordsDTO.getDate(),
 				expenseTrasactionsRecordsDTO.getExpenseCategory(), expenseTrasactionsRecordsDTO.getExpenseSubCategory(),
 				expenseTrasactionsRecordsDTO.getAmount(), expenseTrasactionsRecordsDTO.getPaymentMode(),
-				expenseTrasactionsRecordsDTO.getPaymentModeType(), expenseTrasactionsRecordsDTO.getByWhom());
-
+				expenseTrasactionsRecordsDTO.getPaymentModeType(), expenseTrasactionsRecordsDTO.getByWhom(), expenseTrasactionsRecordsDTO.getAccountNo());
+		}
+		else
+		{
+			return ResponseEntity.ok("Account number must be a 12-digit number.");
+		}
 		if (n == 0) {
 			return ResponseEntity.ok("Error occured while inserting the data");
 		} else
 			return ResponseEntity.ok("Data inserted successfully");
 	}
 
+	private boolean is12DigitNumber(String accountNo) {
+		 return accountNo != null && accountNo.matches("^\\d{12}$");
+	}
+
 	@Override
 	public ResponseEntity<String> updateExpenseTrasactionsRecords(int id,
 			ExpenseTrasactionsRecordsDTO expenseTrasactionsRecordsDTO) {
 
-		int n = expenseTrasactionsRecordsRepository.updateExpenseTrasactionsRecords(id,
+		boolean is12DigitNumber = is12DigitNumber(expenseTrasactionsRecordsDTO.getAccountNo());
+		
+		int n = 0;
+		
+		if(is12DigitNumber == true) {
+		n = expenseTrasactionsRecordsRepository.updateExpenseTrasactionsRecords(id,
 				expenseTrasactionsRecordsDTO.getDate(), expenseTrasactionsRecordsDTO.getExpenseCategory(),
 				expenseTrasactionsRecordsDTO.getExpenseSubCategory(), expenseTrasactionsRecordsDTO.getAmount(),
 				expenseTrasactionsRecordsDTO.getPaymentMode(), expenseTrasactionsRecordsDTO.getPaymentModeType(),
-				expenseTrasactionsRecordsDTO.getByWhom());
+				expenseTrasactionsRecordsDTO.getByWhom(),expenseTrasactionsRecordsDTO.getAccountNo());
+		}
+		else
+		{
+			return ResponseEntity.ok("Account number must be a 12-digit number.");
+		}
 
 		if (n == 0) {
 			return ResponseEntity.ok("Error occured while updating the data");

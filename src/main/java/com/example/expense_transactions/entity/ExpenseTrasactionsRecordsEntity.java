@@ -37,13 +37,16 @@ public class ExpenseTrasactionsRecordsEntity {
 
 	@Column(name = "by_whom")
 	private String byWhom;
+	
+	@Column(name = "account_no")
+	private String accountNo;
 
 	public ExpenseTrasactionsRecordsEntity() {
 		super();
 	}
 
 	public ExpenseTrasactionsRecordsEntity(Date date, String expensesCategoryName, String subCategoryName,
-			double amount, String paymentModeName, String typeName, String byWhom) {
+			double amount, String paymentModeName, String typeName, String byWhom, String accountNo) {
 		super();
 		this.date = date;
 		this.expensesCategoryName = expensesCategoryName;
@@ -52,6 +55,7 @@ public class ExpenseTrasactionsRecordsEntity {
 		this.paymentModeName = paymentModeName;
 		this.typeName = typeName;
 		this.byWhom = byWhom;
+		this.accountNo = accountNo;
 	}
 
 	public int getId() {
@@ -116,6 +120,14 @@ public class ExpenseTrasactionsRecordsEntity {
 
 	public void setByWhom(String byWhom) {
 		this.byWhom = byWhom;
+	}
+	
+	public String getAccountNo() {
+		return accountNo;
+	}
+	
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
 	}
 
 }

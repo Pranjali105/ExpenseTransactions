@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.expense_transactions.dto.AccountDetailsDTO;
 import com.example.expense_transactions.dto.CategorySubCategoryDTO;
 import com.example.expense_transactions.service.MasterTableService;
 
@@ -22,10 +23,21 @@ public class MasterTableController {
 		ResponseEntity<String> categorySubCategory = null;
 
 		if (categorySubCategoryDTO.getCategory() != null && categorySubCategoryDTO.getSubCategory() != null) {
-			categorySubCategory = masterTableService.addCategoryAndSubCategory(categorySubCategoryDTO.getCategory(),
-					categorySubCategoryDTO.getSubCategory());
+			categorySubCategory = masterTableService.addCategoryAndSubCategory(categorySubCategoryDTO);
 		}
 		return categorySubCategory;
+	}
+	
+	@PostMapping(value = "/addAccountDetails")
+	public ResponseEntity<String> addAccountDetails(@RequestBody AccountDetailsDTO accountDetailsDTO) {
+		
+		ResponseEntity<String> accountDetails = null;
+		
+		if(!accountDetailsDTO.getAccountNo().isEmpty() && accountDetailsDTO.getAccountHolderName() != null && accountDetailsDTO.getBankName() != null) {
+			accountDetails = masterTableService.addAccountDetails(accountDetailsDTO);
+		}
+		
+		return accountDetails;
 	}
 
 }
