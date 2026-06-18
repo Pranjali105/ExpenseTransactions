@@ -11,9 +11,21 @@ public class DashboardExpenseCategoryTrasactionsRecordsDTO {
 
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String byWhom;
+	
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	private String accountNo;
 
 	public DashboardExpenseCategoryTrasactionsRecordsDTO() {
 		super();
+	}
+	
+	public DashboardExpenseCategoryTrasactionsRecordsDTO(String categoryName, double amount, String byWhom,
+			String accountNo) {
+		super();
+		this.categoryName = categoryName;
+		this.amount = amount;
+		this.byWhom = byWhom;
+		this.accountNo = accountNo;
 	}
 
 	public DashboardExpenseCategoryTrasactionsRecordsDTO(String categoryName, double amount, String byWhom) {
@@ -28,11 +40,6 @@ public class DashboardExpenseCategoryTrasactionsRecordsDTO {
 		this.categoryName = category_name;
 		this.amount = amount;
 	}
-
-	/*
-	 * DashboardExpenseCategoryTrasactionsRecordsDTO(double amount, String byWhom) {
-	 * super(); this.amount = amount; this.byWhom = byWhom; }
-	 */
 
 	public String getCategoryName() {
 		return categoryName;
@@ -57,5 +64,13 @@ public class DashboardExpenseCategoryTrasactionsRecordsDTO {
 	public void setByWhom(String byWhom) {
 		this.byWhom = byWhom;
 	}
+	
+	public String getAccountNo() {
+		return accountNo;
+	}
 
+	public void setAccountNo(String accountNo) {
+		this.accountNo = accountNo;
+	}
+	
 }
