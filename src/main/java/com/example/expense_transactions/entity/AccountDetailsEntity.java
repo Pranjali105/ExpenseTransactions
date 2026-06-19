@@ -23,6 +23,9 @@ public class AccountDetailsEntity {
 	
 	@Column(name = "bank_name")
 	private String bankName;
+	
+	@Column(name = "balance")
+	private double balance;
 
 	public int getAccountNoId() {
 		return accountNoId;
@@ -55,4 +58,13 @@ public class AccountDetailsEntity {
 	public void setBankName(String bankName) {
 		this.bankName = bankName;
 	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Double balance) {
+		this.balance = balance;
+	}
+	
 }

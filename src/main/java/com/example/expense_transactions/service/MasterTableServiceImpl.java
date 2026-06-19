@@ -38,10 +38,13 @@ public class MasterTableServiceImpl implements MasterTableService {
 		int n = 0;
 
 		if (is12DigitNumber == true) {
-			accountDetailsDTO.setBankName(accountDetailsDTO.getBankName().toUpperCase());
-			n = masterTableRepository.addAccountDetails(accountDetailsDTO.getAccountNo(),
-					accountDetailsDTO.getAccountHolderName(), accountDetailsDTO.getBankName());
-
+			if (accountDetailsDTO.getBalance() >= 10000) {
+				accountDetailsDTO.setBankName(accountDetailsDTO.getBankName().toUpperCase());
+				n = masterTableRepository.addAccountDetails(accountDetailsDTO.getAccountNo(),
+						accountDetailsDTO.getAccountHolderName(), accountDetailsDTO.getBankName(), accountDetailsDTO.getBalance());
+			} else {
+				return ResponseEntity.ok("Account munst have minimun 10,000 Rs balance in the account");
+			}
 		} else {
 			return ResponseEntity.ok("Account number must be a 12-digit number");
 		}

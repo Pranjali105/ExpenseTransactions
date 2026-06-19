@@ -33,7 +33,9 @@ public class MasterTableController {
 		
 		ResponseEntity<String> accountDetails = null;
 		
-		if(!accountDetailsDTO.getAccountNo().isEmpty() && accountDetailsDTO.getAccountHolderName() != null && accountDetailsDTO.getBankName() != null) {
+		Double balance = accountDetailsDTO.getBalance();
+		
+		if(!accountDetailsDTO.getAccountNo().isEmpty()  && accountDetailsDTO.getAccountHolderName() != null && accountDetailsDTO.getBankName() != null && balance != null) {
 			accountDetails = masterTableService.addAccountDetails(accountDetailsDTO);
 		}
 		

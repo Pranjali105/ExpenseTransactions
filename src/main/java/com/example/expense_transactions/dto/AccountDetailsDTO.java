@@ -7,13 +7,29 @@ public class AccountDetailsDTO {
 	private String accountHolderName;
 
 	private String bankName;
+	
+	private double balance;
 
+	public AccountDetailsDTO(String accountNo, String accountHolderName, String bankName, Double balance) {
+		super();
+		this.accountNo = accountNo;
+		this.accountHolderName = accountHolderName;
+		this.bankName = bankName;
+		this.balance = balance;
+	}
+	
 	public AccountDetailsDTO(String accountNo, String accountHolderName, String bankName) {
 		super();
 		this.accountNo = accountNo;
 		this.accountHolderName = accountHolderName;
 		this.bankName = bankName;
 	}
+	
+	public AccountDetailsDTO(String accountNo, double balance) {
+		super();
+		this.accountNo = accountNo;
+		this.balance = balance;
+	}	
 
 	public String getAccountNo() {
 		return accountNo;
@@ -37,6 +53,14 @@ public class AccountDetailsDTO {
 
 	public void setBankName(String bankName) {
 		this.bankName = bankName;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 
 }

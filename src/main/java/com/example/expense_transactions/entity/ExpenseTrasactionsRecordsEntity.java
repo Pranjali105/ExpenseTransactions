@@ -41,8 +41,27 @@ public class ExpenseTrasactionsRecordsEntity {
 	@Column(name = "account_no")
 	private String accountNo;
 
+	@Column(name = "transaction_status")
+	private String transaction_status;
+
 	public ExpenseTrasactionsRecordsEntity() {
 		super();
+	}
+
+	public ExpenseTrasactionsRecordsEntity(int id, Date date, String expensesCategoryName, String subCategoryName,
+			double amount, String paymentModeName, String typeName, String byWhom, String accountNo,
+			String transaction_status) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.expensesCategoryName = expensesCategoryName;
+		this.subCategoryName = subCategoryName;
+		this.amount = amount;
+		this.paymentModeName = paymentModeName;
+		this.typeName = typeName;
+		this.byWhom = byWhom;
+		this.accountNo = accountNo;
+		this.transaction_status = transaction_status;
 	}
 
 	public ExpenseTrasactionsRecordsEntity(Date date, String expensesCategoryName, String subCategoryName,
@@ -128,6 +147,14 @@ public class ExpenseTrasactionsRecordsEntity {
 	
 	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
+	}
+
+	public String getTransaction_status() {
+		return transaction_status;
+	}
+
+	public void setTransaction_status(String transaction_status) {
+		this.transaction_status = transaction_status;
 	}
 
 }

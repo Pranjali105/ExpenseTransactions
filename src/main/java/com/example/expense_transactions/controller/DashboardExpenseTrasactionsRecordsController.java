@@ -25,10 +25,6 @@ public class DashboardExpenseTrasactionsRecordsController {
 	
 	ResponseEntity<List<DashboardExpenseCategoryTrasactionsRecordsDTO>> dashboardExpenseCategoryTrasactionsRecordsLst = null;
 
-	DashboardExpenseTrasactionsRecordsController(DashboardExpenseTrasactionsRecordsService dashboardExpenseTrasactionsRecordsService) {
-		this.dashboardExpenseTrasactionsRecordsService = dashboardExpenseTrasactionsRecordsService;
-	}
-
 	@PostMapping(value = "/getTotalExpenseTrasactionsRecords", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<DashboardExpenseTrasactionsRecordsDTO>> getTotalExpenseTrasactionsRecords(
 			@RequestBody TotalExpenseTrasactionsRecordsDTO totalExpenseTrasactionsRecordsDTO) {
