@@ -5,15 +5,15 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import com.example.expense_transactions.dto.AccountDetailsDTO;
-import com.example.expense_transactions.dto.AccountPassbook;
-import com.example.expense_transactions.dto.CreditDetails;
+import com.example.expense_transactions.dto.AccountPassbookDTO;
+import com.example.expense_transactions.dto.CreditDetailsDTO;
 
 public interface AccountDetailsService {
 
 	ResponseEntity<AccountDetailsDTO> getAccountDetails(String accountNo);
 
-	ResponseEntity<String> addCreditDetails(CreditDetails creditDetails);
+	ResponseEntity<String> addCreditDetails(CreditDetailsDTO creditDetailsDTO);
 
-	ResponseEntity<List<AccountPassbook>> getAllAccountTransactionRecords(AccountDetailsDTO accountDetailsDTO);
+	ResponseEntity<List<AccountPassbookDTO>> getAllAccountTransactionRecords(AccountDetailsDTO accountDetailsDTO);
 
 }

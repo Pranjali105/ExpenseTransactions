@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.expense_transactions.dto.AccountDetailsDTO;
-import com.example.expense_transactions.dto.AccountPassbook;
-import com.example.expense_transactions.dto.CreditDetails;
+import com.example.expense_transactions.dto.AccountPassbookDTO;
+import com.example.expense_transactions.dto.CreditDetailsDTO;
 import com.example.expense_transactions.service.AccountDetailsService;
 
 @RestController
@@ -25,7 +25,7 @@ public class AccountDetailsController {
 	
 	ResponseEntity<String> addCreditDetails = null;
 
-	ResponseEntity<List<AccountPassbook>> accountPassbookResponseEntity = null;
+	ResponseEntity<List<AccountPassbookDTO>> accountPassbookResponseEntity = null;
 
 	@GetMapping(value = "/getAccountDetails/{accountNo}")
 	public ResponseEntity<AccountDetailsDTO> getAccountDetails(@PathVariable(required = true) String accountNo) {
@@ -36,16 +36,16 @@ public class AccountDetailsController {
 	}
 	
 	@PostMapping(value = "/addCreditDetails")
-	public ResponseEntity<String> addCreditDetails(@RequestBody CreditDetails creditDetails) {
-		if (creditDetails != null) {
-			addCreditDetails = accountDetailsService.addCreditDetails(creditDetails);
+	public ResponseEntity<String> addCreditDetails(@RequestBody CreditDetailsDTO creditDetailsDTO) {
+		if (creditDetailsDTO != null) {
+			addCreditDetails = accountDetailsService.addCreditDetails(creditDetailsDTO);
 		}
 		return addCreditDetails;
 		
 	}
 
 	@PostMapping(value = "/getAllAccountTransactionRecords")
-	public ResponseEntity<List<AccountPassbook>> getAllAccountTransactionRecords(
+	public ResponseEntity<List<AccountPassbookDTO>> getAllAccountTransactionRecords(
 			@RequestBody AccountDetailsDTO accountDetailsDTO) {
 
 		if (accountDetailsDTO != null) {

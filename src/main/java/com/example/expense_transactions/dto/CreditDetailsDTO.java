@@ -1,10 +1,14 @@
 package com.example.expense_transactions.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-public class CreditDetails {
+public class CreditDetailsDTO {
 	
 	private int id;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	private String date;
 	
 	private String account_no;
 	
@@ -15,20 +19,21 @@ public class CreditDetails {
 	@JsonInclude(JsonInclude.Include.NON_NULL)
 	private String transaction_status;
 
-	public CreditDetails() {
+	public CreditDetailsDTO() {
 		super();
 	}
 	
-	public CreditDetails(int id, String account_no, double amount, String transaction_type, String transaction_status) {
+	public CreditDetailsDTO(String date, String account_no, double amount, String transaction_type,
+			String transaction_status) {
 		super();
-		this.id = id;
+		this.date = date;
 		this.account_no = account_no;
 		this.amount = amount;
 		this.transaction_type = transaction_type;
 		this.transaction_status = transaction_status;
 	}
 
-	public CreditDetails(String account_no, double amount, String transaction_type) {
+	public CreditDetailsDTO(String account_no, double amount, String transaction_type) {
 		super();
 		this.account_no = account_no;
 		this.amount = amount;
@@ -41,6 +46,14 @@ public class CreditDetails {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getAccount_no() {

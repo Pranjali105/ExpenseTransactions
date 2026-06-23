@@ -9,6 +9,11 @@ public class AccountDetailsDTO {
 	private String bankName;
 	
 	private double balance;
+	
+	public AccountDetailsDTO() {
+		super();
+	}
+
 
 	public AccountDetailsDTO(String accountNo, String accountHolderName, String bankName, Double balance) {
 		super();

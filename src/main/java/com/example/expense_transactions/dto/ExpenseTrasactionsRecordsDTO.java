@@ -51,6 +51,22 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.transaction_status = transaction_status;
 	}
 
+	public ExpenseTrasactionsRecordsDTO(int id, String date, String expenseCategory, String expenseSubCategory,
+			double amount, String paymentMode, String paymentModeType, String byWhom, String accountNo,
+			String transaction_status) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.expenseCategory = expenseCategory;
+		this.expenseSubCategory = expenseSubCategory;
+		this.amount = amount;
+		this.paymentMode = paymentMode;
+		this.paymentModeType = paymentModeType;
+		this.byWhom = byWhom;
+		this.accountNo = accountNo;
+		this.transaction_status = transaction_status;
+	}
+
 	public ExpenseTrasactionsRecordsDTO(int id, long rowNo, String date, String expenseCategory,
 			String expenseSubCategory, double amount, String paymentMode, String paymentModeType, String byWhom,
 			String accountNo) {

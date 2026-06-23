@@ -48,4 +48,14 @@ public interface ExpenseTrasactionsRecordsRepository extends JpaRepository<Expen
 			+ "and etr.by_whom = pb.by_whom and etr.account_no = ad.account_no ORDER BY etr.date desc", nativeQuery = true)
 	List<ExpenseTrasactionsRecordsDTO> getExportExpenseTrasactionsRecords();
 
+	@Query(value = "SELECT etr.id, ROW_NUMBER() OVER (ORDER BY etr.date desc) as row_no, DATE_FORMAT(etr.date, '%Y-%m-%d %H:%i:%s') as date, etr.expenses_category_name, etr.sub_category_name, etr.amount, etr.payment_mode_name, etr.type_name, etr.by_whom, etr.account_no, etr.transaction_status\r\n"
+			+ "FROM expense_trasactions_records etr,expenses_category ec,expenses_sub_category esc,payment_mode pm, payment_mode_type pmt,paid_by pb, account_details ad\r\n"
+			+ "where etr.expenses_category_name = ec.expenses_category_name \r\n"
+			+ "and ec.expenses_category_id = esc.expenses_category_id and etr.sub_category_name = esc.sub_category_name \r\n"
+			+ "and etr.payment_mode_name = pm.payment_mode_name \r\n"
+			+ "and pm.payment_mode_id = pmt.payment_mode_id and etr.type_name = pmt.type_name\r\n"
+			+ "and etr.by_whom = pb.by_whom and etr.account_no = ?1 "
+			+ "ORDER BY etr.date desc", nativeQuery = true)
+	List<ExpenseTrasactionsRecordsDTO> getAllExpenseTransactionRecords(String accountNo);
+
 }

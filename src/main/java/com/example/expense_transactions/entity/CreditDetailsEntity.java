@@ -14,6 +14,9 @@ public class CreditDetailsEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(name = "date")
+	private String date;
 
 	@Column(name = "account_no")
 	private String account_no;
@@ -27,10 +30,10 @@ public class CreditDetailsEntity {
 	@Column(name = "transaction_status")
 	private String transaction_status;
 
-	public CreditDetailsEntity(int id, String account_no, double amount, String transaction_type,
+	public CreditDetailsEntity(String date, String account_no, double amount, String transaction_type,
 			String transaction_status) {
 		super();
-		this.id = id;
+		this.date = date;
 		this.account_no = account_no;
 		this.amount = amount;
 		this.transaction_type = transaction_type;
@@ -51,6 +54,14 @@ public class CreditDetailsEntity {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 	public String getAccount_no() {
