@@ -16,4 +16,6 @@ public interface AccountDetailsService {
 
 	ResponseEntity<List<AccountPassbookDTO>> getAllAccountTransactionRecords(AccountDetailsDTO accountDetailsDTO);
 
+	ResponseEntity<List<AccountPassbookDTO>> exportAllAccountTransactionRecords(AccountDetailsDTO accountDetailsDTO);
+
 }

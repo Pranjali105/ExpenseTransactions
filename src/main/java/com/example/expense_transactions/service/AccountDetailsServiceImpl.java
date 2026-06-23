@@ -161,4 +161,11 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 		return ResponseEntity.ok(accountPassbookLst);
 	}
 
+	@Override
+	public ResponseEntity<List<AccountPassbookDTO>> exportAllAccountTransactionRecords(
+			AccountDetailsDTO accountDetailsDTO) {
+		
+		return this.getAllAccountTransactionRecords(accountDetailsDTO);
+	}
+
 }

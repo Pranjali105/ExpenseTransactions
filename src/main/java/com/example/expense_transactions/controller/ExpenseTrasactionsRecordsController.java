@@ -135,8 +135,8 @@ public class ExpenseTrasactionsRecordsController {
 				MediaType.parseMediaType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"));
 
 		// Format current date as yyyy-MM-dd
-		String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-		String filename = "ExpenseRecords_" + currentDate + ".xlsx";
+		String currentDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		String filename = "ExpenseRecords_" + currentDateTime + ".xlsx";
 
 		// Set Content-Disposition header
 		headers.setContentDisposition(ContentDisposition.attachment().filename(filename).build());

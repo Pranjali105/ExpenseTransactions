@@ -39,7 +39,7 @@ public interface ExpenseTrasactionsRecordsRepository extends JpaRepository<Expen
 	int updateExpenseTrasactionsRecords(int id, String date, String expense, String type, double amount,
 			String payment_mode, String payment_mode_type, String by_whom, String account_no);
 
-	@Query(value = "SELECT etr.id, ROW_NUMBER() OVER (ORDER BY etr.date desc) as row_no, DATE_FORMAT(etr.date, '%Y-%m-%d %H:%i:%s') as date, etr.expenses_category_name, etr.sub_category_name, etr.amount, etr.payment_mode_name, etr.type_name, etr.by_whom, etr.account_no\r\n"
+	@Query(value = "SELECT etr.id, ROW_NUMBER() OVER (ORDER BY etr.date desc) as row_no, DATE_FORMAT(etr.date, '%Y-%m-%d %H:%i:%s') as date, etr.expenses_category_name, etr.sub_category_name, etr.amount, etr.payment_mode_name, etr.type_name, etr.by_whom, etr.account_no, etr.transaction_status\r\n"
 			+ "FROM expense_trasactions_records etr,expenses_category ec,expenses_sub_category esc,payment_mode pm, payment_mode_type pmt,paid_by pb, account_details ad\r\n"
 			+ "where etr.expenses_category_name = ec.expenses_category_name \r\n"
 			+ "and ec.expenses_category_id = esc.expenses_category_id and etr.sub_category_name = esc.sub_category_name \r\n"
