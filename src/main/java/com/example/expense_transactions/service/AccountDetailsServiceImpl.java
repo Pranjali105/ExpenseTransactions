@@ -1,10 +1,13 @@
 package com.example.expense_transactions.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.expense_transactions.dto.AccountDetailsDTO;
+import com.example.expense_transactions.dto.AccountPassbook;
 import com.example.expense_transactions.dto.CreditDetails;
 import com.example.expense_transactions.repository.AccountDetailsRepository;
 import com.example.expense_transactions.repository.CreditDetailsRepository;
@@ -18,10 +21,10 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 	@Autowired
 	CreditDetailsRepository creditDetailsRepository;
 
+	AccountDetailsDTO accountDetailsDTOLst = null;
+
 	@Override
 	public ResponseEntity<AccountDetailsDTO> getAccountDetails(String accountNo) {
-
-		AccountDetailsDTO accountDetailsDTOLst = null;
 
 		boolean is12DigitNumber = is12DigitNumber(accountNo);
 
@@ -55,10 +58,22 @@ public class AccountDetailsServiceImpl implements AccountDetailsService {
 
 		if (n == 0) {
 			return ResponseEntity.ok("Error occured while inserting the data");
-		} else
-		{
+		} else {
+			
+			accountDetailsDTOLst = accountDetailsRepository.getAccountDetails(creditDetails.getAccount_no());
+
+			double updated_balance = accountDetailsDTOLst.getBalance() + creditDetails.getAmount();
+
+			accountDetailsDTOLst.setBalance(updated_balance);
+
 			return ResponseEntity.ok("Data inserted successfully");
 		}
+	}
+
+	@Override
+	public ResponseEntity<List<AccountPassbook>> getAllAccountTransactionRecords(AccountDetailsDTO accountDetailsDTO) {
+
+		return null;
 	}
 
 }

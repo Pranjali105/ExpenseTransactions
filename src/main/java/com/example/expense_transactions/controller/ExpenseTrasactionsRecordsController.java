@@ -1,7 +1,7 @@
 package com.example.expense_transactions.controller;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -102,9 +102,16 @@ public class ExpenseTrasactionsRecordsController {
 			dateCellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("yyyy-MM-dd"));
 
 			// Assuming trasactionsRecordsDTO.getDate() returns java.sql.Date
-			Date sqlDate = trasactionsRecordsDTO.getDate(); // java.sql.Date
+			String sqlDate = trasactionsRecordsDTO.getDate();
 			Cell dateCell = row.createCell(1);
-			dateCell.setCellValue(sqlDate); // set the value
+
+			// Correct pattern: MM is Month, mm is Minute
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+			LocalDateTime dateTime = LocalDateTime.parse(sqlDate, formatter);
+			System.out.println("Parsed successfully: " + dateTime);
+
+			dateCell.setCellValue(dateTime); // set the value
 			dateCell.setCellStyle(dateCellStyle); // apply the format
 
 			row.createCell(2).setCellValue(trasactionsRecordsDTO.getExpenseCategory());

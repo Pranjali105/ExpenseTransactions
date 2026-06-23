@@ -1,7 +1,5 @@
 package com.example.expense_transactions.entity;
 
-import java.sql.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,7 +16,7 @@ public class ExpenseTrasactionsRecordsEntity {
 	private int id;
 
 	@Column(name = "date")
-	private Date date;
+	private String date;
 
 	@Column(name = "expenses_category_name")
 	private String expensesCategoryName;
@@ -48,7 +46,7 @@ public class ExpenseTrasactionsRecordsEntity {
 		super();
 	}
 
-	public ExpenseTrasactionsRecordsEntity(int id, Date date, String expensesCategoryName, String subCategoryName,
+	public ExpenseTrasactionsRecordsEntity(int id, String date, String expensesCategoryName, String subCategoryName,
 			double amount, String paymentModeName, String typeName, String byWhom, String accountNo,
 			String transaction_status) {
 		super();
@@ -64,7 +62,7 @@ public class ExpenseTrasactionsRecordsEntity {
 		this.transaction_status = transaction_status;
 	}
 
-	public ExpenseTrasactionsRecordsEntity(Date date, String expensesCategoryName, String subCategoryName,
+	public ExpenseTrasactionsRecordsEntity(String date, String expensesCategoryName, String subCategoryName,
 			double amount, String paymentModeName, String typeName, String byWhom, String accountNo) {
 		super();
 		this.date = date;
@@ -85,11 +83,11 @@ public class ExpenseTrasactionsRecordsEntity {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 

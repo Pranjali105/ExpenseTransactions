@@ -1,10 +1,7 @@
 package com.example.expense_transactions.service;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +26,12 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 	AccountDetailsService accountDetailsService;
 
 	ResponseEntity<AccountDetailsDTO> accountDetailsDTO;
-	
-	Date sqlDate;
+
+	String sqlDate;
+
+	int n = 0, m = 0;
+
+	double balance_amount = 0, updatedBalance = 0;
 
 	List<ExpenseTrasactionsRecordsDTO> expenseTrasactionsRecordsLst = new ArrayList<ExpenseTrasactionsRecordsDTO>();
 
@@ -54,9 +55,6 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 			ExpenseTrasactionsRecordsDTO expenseTrasactionsRecordsDTO) {
 
 		boolean is12DigitNumber = is12DigitNumber(expenseTrasactionsRecordsDTO.getAccountNo());
-		int n = 0, m = 0;
-
-		double balance_amount = 0, updatedBalance = 0;
 
 		if (is12DigitNumber == true) {
 
@@ -73,9 +71,11 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 				if (m != 0) {
 					
 					sqlDate = getCurrentTimestampdate();
-					
-					n = expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(
-							sqlDate, expenseTrasactionsRecordsDTO.getExpenseCategory(),
+
+					System.out.println("sqlDate" + sqlDate);
+
+					n = expenseTrasactionsRecordsRepository.addExpenseTrasactionsRecords(sqlDate,
+							expenseTrasactionsRecordsDTO.getExpenseCategory(),
 							expenseTrasactionsRecordsDTO.getExpenseSubCategory(),
 							expenseTrasactionsRecordsDTO.getAmount(), expenseTrasactionsRecordsDTO.getPaymentMode(),
 							expenseTrasactionsRecordsDTO.getPaymentModeType(), expenseTrasactionsRecordsDTO.getByWhom(),
@@ -97,29 +97,10 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 			return ResponseEntity.ok("Data inserted successfully");
 	}
 
-	private Date getCurrentTimestampdate() {
-		
-		 // 1. Get current java.sql.Timestamp
-        Timestamp timestamp = Timestamp.from(Instant.now());
-        System.out.println("timestamp" + timestamp); 
-        
-		// Define the pattern matching your input string
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		 String formattedDate = sdf.format(timestamp);
-		 
-		 System.out.println("formattedDate" + formattedDate);
-		 
-		// Parse into modern LocalDate
-	        LocalDate localDate = LocalDate.parse(formattedDate);
-	     
-	        System.out.println("localDate" + localDate);
-	        
-	        // Convert to legacy java.sql.Date
-	        sqlDate = java.sql.Date.valueOf(localDate);
-	        
-	        System.out.println("localDate" + localDate);
-		
-		return sqlDate;
+	private String getCurrentTimestampdate() {
+		LocalDateTime now = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		return now.format(formatter);
 	}
 
 	private boolean is12DigitNumber(String accountNo) {
@@ -145,19 +126,42 @@ public class ExpenseTrasactionsRecordsServiceImpl implements ExpenseTrasactionsR
 		int n = 0;
 
 		if (is12DigitNumber == true) {
-			n = expenseTrasactionsRecordsRepository.updateExpenseTrasactionsRecords(id,
-					expenseTrasactionsRecordsDTO.getDate(), expenseTrasactionsRecordsDTO.getExpenseCategory(),
-					expenseTrasactionsRecordsDTO.getExpenseSubCategory(), expenseTrasactionsRecordsDTO.getAmount(),
-					expenseTrasactionsRecordsDTO.getPaymentMode(), expenseTrasactionsRecordsDTO.getPaymentModeType(),
-					expenseTrasactionsRecordsDTO.getByWhom(), expenseTrasactionsRecordsDTO.getAccountNo());
+
+			accountDetailsDTO = accountDetailsService.getAccountDetails(expenseTrasactionsRecordsDTO.getAccountNo());
+
+			balance_amount = accountDetailsDTO.getBody().getBalance();
+
+			updatedBalance = updateBalanceRecord(balance_amount, expenseTrasactionsRecordsDTO.getAmount());
+
+			if (updatedBalance != 0) {
+
+				m = accountDetailsRepository.updateAccountDetails(expenseTrasactionsRecordsDTO.getAccountNo(),
+						updatedBalance);
+				if (m != 0) {
+					n = expenseTrasactionsRecordsRepository.updateExpenseTrasactionsRecords(id,
+							expenseTrasactionsRecordsDTO.getDate(), expenseTrasactionsRecordsDTO.getExpenseCategory(),
+							expenseTrasactionsRecordsDTO.getExpenseSubCategory(),
+							expenseTrasactionsRecordsDTO.getAmount(), expenseTrasactionsRecordsDTO.getPaymentMode(),
+							expenseTrasactionsRecordsDTO.getPaymentModeType(), expenseTrasactionsRecordsDTO.getByWhom(),
+							expenseTrasactionsRecordsDTO.getAccountNo());
+				} else {
+					return ResponseEntity.ok("Error occured while updating the data");
+				}
+			} else {
+				accountDetailsRepository.updateAccountDetails(expenseTrasactionsRecordsDTO.getAccountNo(),
+						balance_amount);
+				return ResponseEntity.ok("Balance is not sufficient to do the transaction");
+			}
 		} else {
 			return ResponseEntity.ok("Account number must be a 12-digit number.");
 		}
 
 		if (n == 0) {
+
 			return ResponseEntity.ok("Error occured while updating the data");
-		} else
+		} else {
 			return ResponseEntity.ok("Data updated successfully");
+		}
 	}
 
 	@Override

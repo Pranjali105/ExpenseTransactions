@@ -1,7 +1,6 @@
 package com.example.expense_transactions.dto;
 
-import java.sql.Date;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -11,7 +10,8 @@ public class ExpenseTrasactionsRecordsDTO {
 	@JsonIgnore
 	private long rowNo;
 
-	private Date date;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	private String date;
 
 	private String expenseCategory;
 
@@ -34,7 +34,7 @@ public class ExpenseTrasactionsRecordsDTO {
 		super();
 	}
 
-	public ExpenseTrasactionsRecordsDTO(int id, long rowNo, Date date, String expenseCategory,
+	public ExpenseTrasactionsRecordsDTO(int id, long rowNo, String date, String expenseCategory,
 			String expenseSubCategory, double amount, String paymentMode, String paymentModeType, String byWhom,
 			String accountNo, String transaction_status) {
 		super();
@@ -50,15 +50,16 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.accountNo = accountNo;
 		this.transaction_status = transaction_status;
 	}
-	
-	public ExpenseTrasactionsRecordsDTO(int id, long rowNo, Date date, String expense, String type, double amount,
-			String paymentMode, String paymentModeType, String byWhom, String accountNo) {
+
+	public ExpenseTrasactionsRecordsDTO(int id, long rowNo, String date, String expenseCategory,
+			String expenseSubCategory, double amount, String paymentMode, String paymentModeType, String byWhom,
+			String accountNo) {
 		super();
 		this.id = id;
 		this.rowNo = rowNo;
 		this.date = date;
-		this.expenseCategory = expense;
-		this.expenseSubCategory = type;
+		this.expenseCategory = expenseCategory;
+		this.expenseSubCategory = expenseSubCategory;
 		this.amount = amount;
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
@@ -66,7 +67,7 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.accountNo = accountNo;
 	}
 
-	public ExpenseTrasactionsRecordsDTO(int id, Date date, String expense, String type, double amount,
+	public ExpenseTrasactionsRecordsDTO(int id, String date, String expense, String type, double amount,
 			String paymentMode, String paymentModeType, String byWhom, String accountNo) {
 		super();
 		this.id = id;
@@ -96,11 +97,11 @@ public class ExpenseTrasactionsRecordsDTO {
 		this.rowNo = rowNo;
 	}
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
