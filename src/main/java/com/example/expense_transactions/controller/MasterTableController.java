@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.expense_transactions.dto.AccountDetailsDTO;
 import com.example.expense_transactions.dto.CategorySubCategoryDTO;
+import com.example.expense_transactions.dto.LoanDetailsDTO;
 import com.example.expense_transactions.service.MasterTableService;
 
 @RestController
@@ -40,6 +41,21 @@ public class MasterTableController {
 		}
 		
 		return accountDetails;
+	}
+
+	@PostMapping(value = "/addLoanDetails")
+	public ResponseEntity<String> addLoanDetails(@RequestBody LoanDetailsDTO loanDetailsDTO) {
+		
+		ResponseEntity<String> loanDetails = null;
+		
+		Double rateOfInterest = loanDetailsDTO.getRateOfInterest();
+		
+		if(loanDetailsDTO.getSubCategoryName() != null && loanDetailsDTO.getBankName() != null && rateOfInterest != null)
+		{
+			loanDetails = masterTableService.addLoanDetails(loanDetailsDTO);
+		}
+		
+		return loanDetails;
 	}
 
 }

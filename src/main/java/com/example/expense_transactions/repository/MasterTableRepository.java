@@ -35,4 +35,11 @@ public interface MasterTableRepository extends JpaRepository<ExpensesCategoryEnt
 			+ "    SELECT 1 FROM account_details WHERE account_no = ?1)", nativeQuery = true)
 	int addAccountDetails(String accountNumber, String accountHolderName, String bankName, double balance);
 
+	@Modifying
+	@Transactional
+	@Query(value = "INSERT INTO loan_details(sub_category_name, bank_name, rate_of_interest)\r\n"
+			+ "SELECT ?1, ?2, ?3\r\n" + "FROM DUAL\r\n" + "WHERE NOT EXISTS (\r\n"
+			+ "    SELECT 1 FROM loan_details WHERE sub_category_name = ?1 AND bank_name = ?2)", nativeQuery = true)
+	int addLoanDetails(String subCategoryName, String bankName, double rateOfInterest);
+
 }

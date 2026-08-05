@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Transactions Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-brand">💰 Expense Manager</div>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="goToPage('dashboard')">Dashboard</a></li>
+                <li><a href="#" onclick="goToPage('transactions')">Transactions</a></li>
+                <li><a href="#" onclick="goToPage('accounts')">Accounts</a></li>
+                <li><a href="#" onclick="goToPage('master')">Master Setup</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page active">
+                <h1>Dashboard</h1>
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>Monthly Expenses</h3>
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                    <div class="card">
+                        <h3>Expense by Category</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="card">
+                        <h3>Paid By Summary</h3>
+                        <canvas id="paidByChart"></canvas>
+                    </div>
+                    <div class="card">
+                        <h3>Year Filter</h3>
+                        <div class="form-group">
+                            <label for="dashboardYear">Select Year:</label>
+                            <input type="number" id="dashboardYear" placeholder="2024" min="2020" max="2050">
+                            <button onclick="loadDashboard()">Load</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transactions Page -->
+            <div id="transactions" class="page">
+                <h1>Expense Transactions</h1>
+                
+                <!-- Add Transaction Form -->
+                <div class="card form-card">
+                    <h3>Add New Transaction</h3>
+                    <form id="transactionForm" onsubmit="addTransaction(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expenseDate">Date:</label>
+                                <input type="date" id="expenseDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="expenseCategory">Category:</label>
+                                <select id="expenseCategory" required onchange="loadSubCategories()">
+                                    <option value="">-- Select Category --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="expenseSubCategory">Sub Category:</label>
+                                <select id="expenseSubCategory" required>
+                                    <option value="">-- Select Sub Category --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="expenseAmount">Amount:</label>
+                                <input type="number" id="expenseAmount" placeholder="0.00" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="paymentMode">Payment Mode:</label>
+                                <select id="paymentMode" required>
+                                    <option value="">-- Select Payment Mode --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentModeType">Payment Mode Type:</label>
+                                <select id="paymentModeType" required>
+                                    <option value="">-- Select Type --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="paidBy">Paid By:</label>
+                                <select id="paidBy" required>
+                                    <option value="">-- Select Person --</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="accountNo">Account Number:</label>
+                                <select id="accountNo" required>
+                                    <option value="">-- Select Account --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Transaction</button>
+                    </form>
+                </div>
+
+                <!-- Transactions List -->
+                <div class="card">
+                    <h3>Transaction Records</h3>
+                    <div class="table-controls">
+                        <button onclick="loadTransactions()" class="btn-secondary">Refresh</button>
+                        <button onclick="exportTransactions()" class="btn-secondary">Export to Excel</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Date</th>
+                                <th>Category</th>
+                                <th>Sub Category</th>
+                                <th>Amount</th>
+                                <th>Payment Mode</th>
+                                <th>Paid By</th>
+                                <th>Account</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsList">
+                            <tr>
+                                <td colspan="9" class="text-center">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Accounts Page -->
+            <div id="accounts" class="page">
+                <h1>Account Management</h1>
+                
+                <!-- Add Account Form -->
+                <div class="card form-card">
+                    <h3>Add New Account</h3>
+                    <form id="accountForm" onsubmit="addAccount(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="accountNo">Account Number:</label>
+                                <input type="text" id="accountNo" placeholder="1234567890" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="accountHolderName">Account Holder Name:</label>
+                                <input type="text" id="accountHolderName" placeholder="John Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bankName">Bank Name:</label>
+                                <input type="text" id="bankName" placeholder="XYZ Bank" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="balance">Initial Balance:</label>
+                                <input type="number" id="balance" placeholder="0.00" step="0.01" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Account</button>
+                    </form>
+                </div>
+
+                <!-- Account Details -->
+                <div class="card">
+                    <h3>View Account Details</h3>
+                    <div class="form-group">
+                        <label for="searchAccountNo">Search Account:</label>
+                        <input type="text" id="searchAccountNo" placeholder="Enter Account Number">
+                        <button onclick="getAccountDetails()" class="btn-secondary">Search</button>
+                    </div>
+                    <div id="accountDetailsView"></div>
+                </div>
+
+                <!-- Account Passbook -->
+                <div class="card">
+                    <h3>Account Passbook</h3>
+                    <div class="form-group">
+                        <label for="passbookAccountNo">Account Number:</label>
+                        <input type="text" id="passbookAccountNo" placeholder="Enter Account Number">
+                        <button onclick="getPassbook()" class="btn-secondary">Load Passbook</button>
+                        <button onclick="exportPassbook()" class="btn-secondary">Export to Excel</button>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Withdrawal</th>
+                                <th>Deposit</th>
+                                <th>Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="passbookList">
+                            <tr>
+                                <td colspan="6" class="text-center">Enter account number and click Load</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Master Setup Page -->
+            <div id="master" class="page">
+                <h1>Master Setup</h1>
+                
+                <!-- Add Category -->
+                <div class="card form-card">
+                    <h3>Add Category & Sub Category</h3>
+                    <form id="categoryForm" onsubmit="addCategory(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="category">Category Name:</label>
+                                <input type="text" id="category" placeholder="e.g., Food" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subCategory">Sub Category Name:</label>
+                                <input type="text" id="subCategory" placeholder="e.g., Groceries" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Category</button>
+                    </form>
+                </div>
+
+                <!-- Add Payment Mode -->
+                <div class="card form-card">
+                    <h3>Add Payment Mode</h3>
+                    <form id="paymentModeForm" onsubmit="addPaymentMode(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="newPaymentMode">Payment Mode:</label>
+                                <input type="text" id="newPaymentMode" placeholder="e.g., Cash" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="paymentModeTypeInput">Mode Type:</label>
+                                <input type="text" id="paymentModeTypeInput" placeholder="e.g., Annual" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Payment Mode</button>
+                    </form>
+                </div>
+
+                <!-- Add Paid By -->
+                <div class="card form-card">
+                    <h3>Add Paid By Person</h3>
+                    <form id="paidByForm" onsubmit="addPaidBy(event)">
+                        <div class="form-group">
+                            <label for="paidByName">Name:</label>
+                            <input type="text" id="paidByName" placeholder="e.g., John Doe" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Person</button>
+                    </form>
+                </div>
+
+                <!-- Add Credit Details -->
+                <div class="card form-card">
+                    <h3>Add Credit Details</h3>
+                    <form id="creditForm" onsubmit="addCreditDetails(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="creditAccountNo">Account Number:</label>
+                                <input type="text" id="creditAccountNo" placeholder="Account Number" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="creditAmount">Amount:</label>
+                                <input type="number" id="creditAmount" placeholder="0.00" step="0.01" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="creditDescription">Description:</label>
+                            <input type="text" id="creditDescription" placeholder="Credit reason" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Add Credit</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Success/Error Messages -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

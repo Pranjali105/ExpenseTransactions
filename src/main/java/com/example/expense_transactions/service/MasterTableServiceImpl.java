@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.expense_transactions.dto.AccountDetailsDTO;
 import com.example.expense_transactions.dto.CategorySubCategoryDTO;
+import com.example.expense_transactions.dto.LoanDetailsDTO;
 import com.example.expense_transactions.repository.MasterTableRepository;
 
 @Service
@@ -57,6 +58,20 @@ public class MasterTableServiceImpl implements MasterTableService {
 
 	public static boolean is12DigitNumber(String accountNumber) {
 		return accountNumber != null && accountNumber.matches("^\\d{12}$");
+	}
+
+	@Override
+	public ResponseEntity<String> addLoanDetails(LoanDetailsDTO loanDetailsDTO) {
+		int n = 0;
+
+		n= masterTableRepository.addLoanDetails(loanDetailsDTO.getSubCategoryName(), loanDetailsDTO.getBankName(),
+				loanDetailsDTO.getRateOfInterest());
+		
+		if (n == 0) {
+			return ResponseEntity.ok("Error occured while inserting the data");
+		} else
+
+			return ResponseEntity.ok("Data inserted successfully");
 	}
 
 }
