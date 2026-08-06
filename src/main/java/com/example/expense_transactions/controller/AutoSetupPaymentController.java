@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.expense_transactions.dto.AutoSetupDTO;
-import com.example.expense_transactions.service.autoSetupService;
+import com.example.expense_transactions.dto.AutoSetupPaymentDTO;
+import com.example.expense_transactions.service.AutoSetupService;
 
 @RestController
 public class AutoSetupPaymentController {
 	
 	@Autowired
-	autoSetupService autoSetupService;
+	AutoSetupService AutoSetupService;
 
 	@PostMapping(value = "/addSetupAutoPayment", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> addSetupAutoPayment(@RequestBody AutoSetupDTO autoSetupDTO) {
+	public ResponseEntity<String> addSetupAutoPayment(@RequestBody AutoSetupPaymentDTO autoSetupPaymentDTO) {
 		ResponseEntity<String> autoSetup = null;
 
-		if (autoSetupDTO != null) {
-			autoSetup = autoSetupService.addSetupAutoPayment(autoSetupDTO);
+		if (autoSetupPaymentDTO != null) {
+			autoSetup = AutoSetupService.addSetupAutoPayment(autoSetupPaymentDTO);
 		}
 		
 		return autoSetup;

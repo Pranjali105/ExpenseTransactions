@@ -2,10 +2,10 @@ package com.example.expense_transactions.service;
 
 import org.springframework.http.ResponseEntity;
 
-import com.example.expense_transactions.dto.AutoSetupDTO;
+import com.example.expense_transactions.dto.AutoSetupPaymentDTO;
 
-public interface autoSetupService{
+public interface AutoSetupService{
 
-	ResponseEntity<String> addSetupAutoPayment(AutoSetupDTO autoSetupDTO);
+	ResponseEntity<String> addSetupAutoPayment(AutoSetupPaymentDTO autoSetupPaymentDTO);
 
 }
