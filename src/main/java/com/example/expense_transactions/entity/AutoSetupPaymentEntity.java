@@ -28,7 +28,7 @@ public class AutoSetupPaymentEntity {
 	private String bankName;
 
 	@Column(name = "amount")
-	private double amount;
+	private Double amount;
 
 	@Column(name = "tenure")
 	private Integer tenure;
@@ -39,14 +39,17 @@ public class AutoSetupPaymentEntity {
 	@Column(name = "frequency")
 	private String frequency;
 
-	@Column(name = "emi_amount")
-	private Double EMIAmount;
+	@Column(name = "monthly_emi_amount")
+	private Double monthlyEmiAmount;
 
-	@Column(name = "remaining_installment")
-	private Integer remainingInstallment;
+	@Column(name = "remaining_emi_amount")
+	private Double remainingEmiAmount;
 
-	@Column(name = "remaining_amount")
-	private Double remainingAmount;
+	@Column(name = "total_installment_count")
+	private Integer totalInstallmentCount;
+
+	@Column(name = "remaining_installment_count")
+	private Integer remainingInstallmentCount;
 
 	@Column(name = "payment_mode")
 	private String paymentMode;
@@ -62,6 +65,9 @@ public class AutoSetupPaymentEntity {
 
 	@Column(name = "end_date")
 	private String endDate;
+	
+	@Column(name = "next_emi_date")
+	private String nextEmiDate;
 
 	@Column(name = "transaction_date")
 	private String transactionDate;
@@ -73,36 +79,11 @@ public class AutoSetupPaymentEntity {
 		super();
 	}
 
-	public AutoSetupPaymentEntity(String categoryName, String subCategoryName, String accountNo, String bankName,
-			double amount, Integer tenure, Double rateOfInterest, String frequency, Double EMIAmount,
-			Integer remainingInstallment, Double remainingAmount, String paymentMode, String paymentModeType, String byWhom,
-			String startDate, String endDate, String transactionDate, String loanStatus) {
-		super();
-		this.categoryName = categoryName;
-		this.subCategoryName = subCategoryName;
-		this.accountNo = accountNo;
-		this.bankName = bankName;
-		this.amount = amount;
-		this.tenure = tenure;
-		this.rateOfInterest = rateOfInterest;
-		this.frequency = frequency;
-		this.EMIAmount = EMIAmount;
-		this.remainingInstallment = remainingInstallment;
-		this.remainingAmount = remainingAmount;
-		this.paymentMode = paymentMode;
-		this.paymentModeType = paymentModeType;
-		this.byWhom = byWhom;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.transactionDate = transactionDate;
-		this.loanStatus = loanStatus;
-	}
-
 	public AutoSetupPaymentEntity(Integer id, String categoryName, String subCategoryName, String accountNo,
-			String bankName, double amount, Integer tenure, Double rateOfInterest, String frequency,
-			Double EMIAmount, Integer remainingInstallment, Double remainingAmount, String paymentMode,
-			String paymentModeType, String byWhom, String startDate, String endDate, String transactionDate,
-			String loanStatus) {
+			String bankName, Double amount, Integer tenure, Double rateOfInterest, String frequency,
+			Double monthlyEmiAmount, Double remainingEmiAmount, Integer totalInstallmentCount,
+			Integer remainingInstallmentCount, String paymentMode, String paymentModeType, String byWhom,
+			String startDate, String endDate, String nextEmiDate, String transactionDate, String loanStatus) {
 		super();
 		this.id = id;
 		this.categoryName = categoryName;
@@ -113,14 +94,44 @@ public class AutoSetupPaymentEntity {
 		this.tenure = tenure;
 		this.rateOfInterest = rateOfInterest;
 		this.frequency = frequency;
-		this.EMIAmount = EMIAmount;
-		this.remainingInstallment = remainingInstallment;
-		this.remainingAmount = remainingAmount;
+		this.monthlyEmiAmount = monthlyEmiAmount;
+		this.remainingEmiAmount = remainingEmiAmount;
+		this.totalInstallmentCount = totalInstallmentCount;
+		this.remainingInstallmentCount = remainingInstallmentCount;
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
 		this.byWhom = byWhom;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.nextEmiDate = nextEmiDate;
+		this.transactionDate = transactionDate;
+		this.loanStatus = loanStatus;
+	}
+
+	public AutoSetupPaymentEntity(String categoryName, String subCategoryName, String accountNo, String bankName,
+			Double amount, Integer tenure, Double rateOfInterest, String frequency, Double monthlyEmiAmount,
+			Double remainingEmiAmount, Integer totalInstallmentCount, Integer remainingInstallmentCount,
+			String paymentMode, String paymentModeType, String byWhom, String startDate, String endDate, String nextEmiDate, 
+			String transactionDate, String loanStatus) {
+		super();
+		this.categoryName = categoryName;
+		this.subCategoryName = subCategoryName;
+		this.accountNo = accountNo;
+		this.bankName = bankName;
+		this.amount = amount;
+		this.tenure = tenure;
+		this.rateOfInterest = rateOfInterest;
+		this.frequency = frequency;
+		this.monthlyEmiAmount = monthlyEmiAmount;
+		this.remainingEmiAmount = remainingEmiAmount;
+		this.totalInstallmentCount = totalInstallmentCount;
+		this.remainingInstallmentCount = remainingInstallmentCount;
+		this.paymentMode = paymentMode;
+		this.paymentModeType = paymentModeType;
+		this.byWhom = byWhom;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.nextEmiDate = nextEmiDate;
 		this.transactionDate = transactionDate;
 		this.loanStatus = loanStatus;
 	}
@@ -165,30 +176,22 @@ public class AutoSetupPaymentEntity {
 		this.bankName = bankName;
 	}
 
-	public double getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
-	}
-
-	public Double getEMIAmount() {
-		return EMIAmount;
-	}
-
-	public void setEMIAmount(Double eMIAmount) {
-		EMIAmount = eMIAmount;
 	}
 
 	public Integer getTenure() {
 		return tenure;
 	}
-	
+
 	public void setTenure(Integer tenure) {
 		this.tenure = tenure;
 	}
-	
+
 	public Double getRateOfInterest() {
 		return rateOfInterest;
 	}
@@ -205,20 +208,36 @@ public class AutoSetupPaymentEntity {
 		this.frequency = frequency;
 	}
 
-	public Integer getRemainingInstallment() {
-		return remainingInstallment;
+	public Double getMonthlyEmiAmount() {
+		return monthlyEmiAmount;
 	}
 
-	public void setRemainingInstallment(Integer remainingInstallment) {
-		this.remainingInstallment = remainingInstallment;
+	public void setMonthlyEmiAmount(Double monthlyEmiAmount) {
+		this.monthlyEmiAmount = monthlyEmiAmount;
 	}
 
-	public Double getRemainingAmount() {
-		return remainingAmount;
+	public Double getRemainingEmiAmount() {
+		return remainingEmiAmount;
 	}
 
-	public void setRemainingAmount(Double remainingAmount) {
-		this.remainingAmount = remainingAmount;
+	public void setRemainingEmiAmount(Double remainingEmiAmount) {
+		this.remainingEmiAmount = remainingEmiAmount;
+	}
+
+	public Integer getTotalInstallmentCount() {
+		return totalInstallmentCount;
+	}
+
+	public void setTotalInstallmentCount(Integer totalInstallmentCount) {
+		this.totalInstallmentCount = totalInstallmentCount;
+	}
+
+	public Integer getRemainingInstallmentCount() {
+		return remainingInstallmentCount;
+	}
+
+	public void setRemainingInstallmentCount(Integer remainingInstallmentCount) {
+		this.remainingInstallmentCount = remainingInstallmentCount;
 	}
 
 	public String getPaymentMode() {
@@ -259,6 +278,14 @@ public class AutoSetupPaymentEntity {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public String getNextEmiDate() {
+		return nextEmiDate;
+	}
+
+	public void setNextEmiDate(String nextEmiDate) {
+		this.nextEmiDate = nextEmiDate;
 	}
 
 	public String getTransactionDate() {

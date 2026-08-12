@@ -64,7 +64,7 @@ public class MasterTableServiceImpl implements MasterTableService {
 	public ResponseEntity<String> addLoanDetails(LoanDetailsDTO loanDetailsDTO) {
 		int n = 0;
 
-		n= masterTableRepository.addLoanDetails(loanDetailsDTO.getSubCategoryName(), loanDetailsDTO.getBankName(),
+		n= masterTableRepository.addLoanDetails(loanDetailsDTO.getSubCategoryName(), loanDetailsDTO.getBankName().toUpperCase(),
 				loanDetailsDTO.getRateOfInterest());
 		
 		if (n == 0) {

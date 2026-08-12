@@ -1,5 +1,6 @@
 package com.example.expense_transactions.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class AutoSetupPaymentDTO {
@@ -10,18 +11,28 @@ public class AutoSetupPaymentDTO {
 	private String subCategoryName;
 	private String accountNo;
 	private String bankName;
-	private double amount;
+	private Double amount;
 	private Integer tenure;
 	private Double rateOfInterest;
 	private String frequency;
-	private Double EMIAmount;
-	private Integer remainingInstallment;
-	private Double remainingAmount;
+	private Double monthlyEmiAmount;
+	private Double remainingEmiAmount;
+	private Integer totalInstallmentCount;
+	private Integer remainingInstallmentCount;
 	private String paymentMode;
 	private String paymentModeType;
 	private String byWhom;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private String startDate;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private String endDate;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+	private String nextEmiDate;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private String transactionDate;
 	private String loanStatus;
 
@@ -29,10 +40,11 @@ public class AutoSetupPaymentDTO {
 		super();
 	}
 
-	public AutoSetupPaymentDTO(Integer id, String categoryName, String subCategoryName, String accountNo, String bankName,
-			double amount, Integer tenure, Double rateOfInterest, String frequency, Double EMIAmount ,Integer remainingInstallment,
-			Double remainingAmount, String paymentMode, String paymentModeType, String byWhom,
-			String startDate, String endDate, String transactionDate, String loanStatus) {
+	public AutoSetupPaymentDTO(Integer id, String categoryName, String subCategoryName, String accountNo,
+			String bankName, Double amount, Integer tenure, Double rateOfInterest, String frequency,
+			Double monthlyEmiAmount, Double remainingEmiAmount, Integer totalInstallmentCount,
+			Integer remainingInstallmentCount, String paymentMode, String paymentModeType, String byWhom,
+			String startDate, String endDate, String nextEmiDate,String transactionDate, String loanStatus) {
 		super();
 		this.id = id;
 		this.categoryName = categoryName;
@@ -43,22 +55,25 @@ public class AutoSetupPaymentDTO {
 		this.tenure = tenure;
 		this.rateOfInterest = rateOfInterest;
 		this.frequency = frequency;
-		this.EMIAmount = EMIAmount;
-		this.remainingInstallment = remainingInstallment;
-		this.remainingAmount = remainingAmount;
+		this.monthlyEmiAmount = monthlyEmiAmount;
+		this.remainingEmiAmount = remainingEmiAmount;
+		this.totalInstallmentCount = totalInstallmentCount;
+		this.remainingInstallmentCount = remainingInstallmentCount;
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
 		this.byWhom = byWhom;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.nextEmiDate = nextEmiDate;
 		this.transactionDate = transactionDate;
 		this.loanStatus = loanStatus;
 	}
-	
-	public AutoSetupPaymentDTO(String categoryName, String subCategoryName, String accountNo, String bankName, double amount,
-			Integer tenure, Double rateOfInterest, String frequency, Double EMIAmount , Integer remainingInstallment, 
-			Double remainingAmount, String paymentMode, String paymentModeType, String byWhom, String startDate,
-			String endDate, String transactionDate, String loanStatus) {
+
+	public AutoSetupPaymentDTO(String categoryName, String subCategoryName, String accountNo, String bankName,
+			Double amount, Integer tenure, Double rateOfInterest, String frequency, Double monthlyEmiAmount,
+			Double remainingEmiAmount, Integer totalInstallmentCount, Integer remainingInstallmentCount,
+			String paymentMode, String paymentModeType, String byWhom, String startDate, String endDate, String nextEmiDate,
+			String transactionDate, String loanStatus) {
 		super();
 		this.categoryName = categoryName;
 		this.subCategoryName = subCategoryName;
@@ -68,14 +83,16 @@ public class AutoSetupPaymentDTO {
 		this.tenure = tenure;
 		this.rateOfInterest = rateOfInterest;
 		this.frequency = frequency;
-		this.EMIAmount = EMIAmount;
-		this.remainingInstallment = remainingInstallment;
-		this.remainingAmount = remainingAmount;
+		this.monthlyEmiAmount = monthlyEmiAmount;
+		this.remainingEmiAmount = remainingEmiAmount;
+		this.totalInstallmentCount = totalInstallmentCount;
+		this.remainingInstallmentCount = remainingInstallmentCount;
 		this.paymentMode = paymentMode;
 		this.paymentModeType = paymentModeType;
 		this.byWhom = byWhom;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.nextEmiDate = nextEmiDate;
 		this.transactionDate = transactionDate;
 		this.loanStatus = loanStatus;
 	}
@@ -111,7 +128,7 @@ public class AutoSetupPaymentDTO {
 	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
 	}
-	
+
 	public String getBankName() {
 		return bankName;
 	}
@@ -120,26 +137,18 @@ public class AutoSetupPaymentDTO {
 		this.bankName = bankName;
 	}
 
-	public double getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
-	}
-
-	public Double getEMIAmount() {
-		return EMIAmount;
-	}
-
-	public void setEMIAmount(Double eMIAmount) {
-		EMIAmount = eMIAmount;
 	}
 
 	public Integer getTenure() {
 		return tenure;
 	}
-	
+
 	public void setTenure(Integer tenure) {
 		this.tenure = tenure;
 	}
@@ -160,20 +169,36 @@ public class AutoSetupPaymentDTO {
 		this.frequency = frequency;
 	}
 
-	public Integer getRemainingInstallment() {
-		return remainingInstallment;
+	public Double getMonthlyEmiAmount() {
+		return monthlyEmiAmount;
 	}
 
-	public void setRemainingInstallment(Integer remainingInstallment) {
-		this.remainingInstallment = remainingInstallment;
+	public void setMonthlyEmiAmount(Double monthlyEmiAmount) {
+		this.monthlyEmiAmount = monthlyEmiAmount;
 	}
 
-	public Double getRemainingAmount() {
-		return remainingAmount;
+	public Double getRemainingEmiAmount() {
+		return remainingEmiAmount;
 	}
 
-	public void setRemainingAmount(Double remainingAmount) {
-		this.remainingAmount = remainingAmount;
+	public void setRemainingEmiAmount(Double remainingEmiAmount) {
+		this.remainingEmiAmount = remainingEmiAmount;
+	}
+
+	public Integer getTotalInstallmentCount() {
+		return totalInstallmentCount;
+	}
+
+	public void setTotalInstallmentCount(Integer totalInstallmentCount) {
+		this.totalInstallmentCount = totalInstallmentCount;
+	}
+
+	public Integer getRemainingInstallmentCount() {
+		return remainingInstallmentCount;
+	}
+
+	public void setRemainingInstallmentCount(Integer remainingInstallmentCount) {
+		this.remainingInstallmentCount = remainingInstallmentCount;
 	}
 
 	public String getPaymentMode() {
@@ -216,6 +241,14 @@ public class AutoSetupPaymentDTO {
 		this.endDate = endDate;
 	}
 
+	public String getNextEmiDate() {
+		return nextEmiDate;
+	}
+
+	public void setNextEmiDate(String nextEmiDate) {
+		this.nextEmiDate = nextEmiDate;
+	}
+
 	public String getTransactionDate() {
 		return transactionDate;
 	}
@@ -223,11 +256,11 @@ public class AutoSetupPaymentDTO {
 	public void setTransactionDate(String transactionDate) {
 		this.transactionDate = transactionDate;
 	}
-	
+
 	public String getLoanStatus() {
 		return loanStatus;
 	}
-	
+
 	public void setLoanStatus(String loanStatus) {
 		this.loanStatus = loanStatus;
 	}
